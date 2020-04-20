@@ -392,6 +392,9 @@ struct fuse_req {
 
 	/** virtio-fs's physically contiguous buffer for in and out args */
 	void *argbuf;
+
+	/** fuse_conn this request belongs to */
+	struct fuse_conn *fc;
 };
 
 struct fuse_iqueue;
