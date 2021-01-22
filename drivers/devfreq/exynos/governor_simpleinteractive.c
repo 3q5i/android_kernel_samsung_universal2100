@@ -14,6 +14,7 @@
 #include <soc/samsung/exynos_pm_qos.h>
 #include <linux/module.h>
 #include <linux/slab.h>
+#include <uapi/linux/sched/types.h>
 
 #include <linux/time.h>
 #include <linux/timer.h>
@@ -356,6 +357,7 @@ static int devfreq_simple_interactive_register_notifier(struct devfreq *df)
 {
 	int ret;
 	struct devfreq_simple_interactive_data *data = df->data;
+	struct sched_param param = {.sched_priority = (MAX_USER_RT_PRIO / 2)};
 
 	if (!data)
 		return -EINVAL;
@@ -391,16 +393,14 @@ static int devfreq_simple_interactive_register_notifier(struct devfreq *df)
 	if (IS_ERR(data->change_freq_task)) {
 		pr_err("%s: failed kthread_create for simpleinteractive governor\n", __func__);
 		ret = PTR_ERR(data->change_freq_task);
+		goto err3;
+	}
 
-		destroy_timer_on_stack(&data->freq_timer);
-#if defined(CONFIG_EXYNOS_ALT_DVFS) || defined(CONFIG_EXYNOS_ALT_DVFS_MODULE)
-		destroy_timer_on_stack(&data->freq_slack_timer);
-#endif
-		exynos_pm_qos_remove_notifier(data->pm_qos_class, &data->nb.nb);
-		if (data->pm_qos_class_max)
-			exynos_pm_qos_remove_notifier(data->pm_qos_class_max, &data->nb_max.nb);
-
-		goto err2;
+	ret = sched_setscheduler_nocheck(data->change_freq_task, SCHED_FIFO, &param);
+	if (ret) {
+		kthread_stop(data->change_freq_task);
+		pr_err("%s: failed to set SCHED_FIFO\n", __func__);
+		goto err3;
 	}
 
 #if defined(CONFIG_EXYNOS_ALT_DVFS) || defined(CONFIG_EXYNOS_ALT_DVFS_MODULE)
@@ -419,6 +419,15 @@ static int devfreq_simple_interactive_register_notifier(struct devfreq *df)
 
 	wake_up_process(data->change_freq_task);
 	return 0;
+
+err3:
+	destroy_timer_on_stack(&data->freq_timer);
+#if defined(CONFIG_EXYNOS_ALT_DVFS) || defined(CONFIG_EXYNOS_ALT_DVFS_MODULE)
+	destroy_timer_on_stack(&data->freq_slack_timer);
+#endif
+	exynos_pm_qos_remove_notifier(data->pm_qos_class, &data->nb.nb);
+	if (data->pm_qos_class_max)
+		exynos_pm_qos_remove_notifier(data->pm_qos_class_max, &data->nb_max.nb);
 
 err2:
 	kfree((void *)&data->nb_max.nb);
