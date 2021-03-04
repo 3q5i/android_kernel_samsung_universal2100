@@ -21,7 +21,6 @@
 #include <linux/moduleparam.h>
 #include <linux/platform_device.h>
 
-#include <soc/samsung/debug-snapshot.h>
 #include <soc/samsung/exynos-cpuhp.h>
 
 struct cpuhp_user {
@@ -37,26 +36,17 @@ static struct {
 	/* flag for suspend */
 	bool			suspended;
 
-	/* flag for debug print */
-	bool			debug;
-
 	/* list head for requester */
 	struct list_head	users;
 
-	/* user for system */
-	struct cpuhp_user	system_user;
-
-	/* user for sysfs */
-	struct cpuhp_user	sysfs_user;
+	/* user for sysfs mask */
+	struct cpumask		sysfs_user_mask;
 
 	/* Synchronizes accesses to refcount and cpumask */
 	struct mutex		lock;
 
 	/* user request mask */
 	struct cpumask		online_cpus;
-
-	/* available mask */
-	struct cpumask		available_cpus;
 
 	/* cpuhp kobject */
 	struct kobject		*kobj;
@@ -67,7 +57,7 @@ static struct {
 /******************************************************************************/
 /*                             Helper functions                               */
 /******************************************************************************/
-static int cpuhp_do(void);
+static int cpuhp_do(const char *reason);
 
 /*
  * Update pm_suspend status.
@@ -167,7 +157,7 @@ int exynos_cpuhp_register(char *name, struct cpumask mask)
 	mutex_unlock(&cpuhp.lock);
 
 	/* applying new user's request */
-	return cpuhp_do();
+	return cpuhp_do(name);
 }
 EXPORT_SYMBOL_GPL(exynos_cpuhp_register);
 
@@ -181,7 +171,7 @@ int exynos_cpuhp_request(char *name, struct cpumask mask)
 	if (cpuhp_update_user(name, mask))
 		return 0;
 
-	return cpuhp_do();
+	return cpuhp_do(name);
 }
 EXPORT_SYMBOL_GPL(exynos_cpuhp_request);
 
@@ -253,8 +243,6 @@ static struct cpumask cpuhp_get_online_cpus(void)
 		panic("Online mask(%s) is wrong\n", buf);
 	}
 
-	cpumask_and(&mask, &mask, &cpuhp.available_cpus);
-
 	return mask;
 }
 
@@ -280,18 +268,14 @@ static int cpuhp_cpu_down(struct cpumask disable_cpus)
 	return cpuhp_out(&disable_cpus);
 }
 
-/* print cpu control informatoin for deubgging */
-static void cpuhp_print_debug_info(struct cpumask online_cpus)
+/* print cpu control information for debugging */
+static void cpuhp_print_debug_info(const char *reason, struct cpumask online_cpus)
 {
 	char new_buf[10], pre_buf[10];
 
 	scnprintf(pre_buf, sizeof(pre_buf), "%*pbl", cpumask_pr_args(&cpuhp.online_cpus));
 	scnprintf(new_buf, sizeof(new_buf), "%*pbl", cpumask_pr_args(&online_cpus));
-	dbg_snapshot_printk("%s: %s -> %s\n", __func__, pre_buf, new_buf);
-
-	/* print cpu control information */
-	if (cpuhp.debug)
-		pr_info("%s: %s -> %s\n", __func__, pre_buf, new_buf);
+	pr_info("%s: (%s) %s -> %s\n", __func__, reason, pre_buf, new_buf);
 }
 
 /*
@@ -299,7 +283,7 @@ static void cpuhp_print_debug_info(struct cpumask online_cpus)
  * enables or disables cpus, so all APIs in this driver call cpuhp_do()
  * eventually.
  */
-static int cpuhp_do(void)
+static int cpuhp_do(const char *reason)
 {
 	struct cpumask online_cpus, enable_cpus, disable_cpus;
 	int ret = 0;
@@ -315,13 +299,14 @@ static int cpuhp_do(void)
 	}
 
 	online_cpus = cpuhp_get_online_cpus();
-	cpuhp_print_debug_info(online_cpus);
 
 	/* if there is no mask change, skip */
 	if (cpumask_equal(&cpuhp.online_cpus, &online_cpus))
 		goto out;
 
-	/* get the enable cpu  mask for new online cpu */
+	cpuhp_print_debug_info(reason, online_cpus);
+
+	/* get the enable cpu mask for new online cpu */
 	cpumask_andnot(&enable_cpus, &online_cpus, &cpuhp.online_cpus);
 	/* get the disable cpu mask for new offline cpu */
 	cpumask_andnot(&disable_cpus, &cpuhp.online_cpus, &online_cpus);
@@ -349,7 +334,7 @@ static int cpuhp_control(bool enable)
 
 	if (enable) {
 		cpuhp_enable(true);
-		cpuhp_do();
+		cpuhp_do("enable");
 	} else {
 		mutex_lock(&cpuhp.lock);
 
@@ -385,19 +370,16 @@ static int cpuhp_control(bool enable)
  * max_online_cpu sysfs node. User input minimum and maxinum online cpu
  * to this node as below:
  *
- * #echo mask > /sys/power/cpuhp/set_online_cpu
+ * #echo mask > /sys/devices/platform/exynos-cpuphp/cpuhp/set_online_cpu
  */
-#define STR_LEN 6
 static ssize_t set_online_cpu_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
-	unsigned int online_cpus;
-
-	online_cpus = *(unsigned int *)cpumask_bits(&cpuhp.sysfs_user.online_cpus);
-
-	return snprintf(buf, 30, "set online cpu : 0x%x\n", online_cpus);
+	return scnprintf(buf, PAGE_SIZE, "0x%x\n",
+			 *(unsigned int *)cpumask_bits(&cpuhp.sysfs_user_mask));
 }
 
+#define STR_LEN 6
 static ssize_t set_online_cpu_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
@@ -427,8 +409,8 @@ static ssize_t set_online_cpu_store(struct device *dev,
 		return -EINVAL;
 	}
 
-	cpumask_copy(&cpuhp.sysfs_user.online_cpus, &online_cpus);
-	cpuhp_do();
+	cpumask_copy(&cpuhp.sysfs_user_mask, &online_cpus);
+	exynos_cpuhp_request("SYSFS", cpuhp.sysfs_user_mask);
 
 	return count;
 }
@@ -437,7 +419,7 @@ DEVICE_ATTR_RW(set_online_cpu);
 /*
  * It shows cpuhp driver requested online_cpu
  *
- * #cat /sys/power/cpuhp/online_cpu
+ * #cat /sys/devices/platform/exynos-cpuphp/cpuhp/online_cpu
  */
 static ssize_t online_cpu_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
@@ -454,7 +436,7 @@ DEVICE_ATTR_RO(online_cpu);
  * It shows users information(name, requesting cpu_mask)
  * registered in cpu-hp user_list
  *
- * #cat /sys/power/cpuhp/users
+ * #cat /sys/devices/platform/exynos-cpuphp/cpuhp/users
  */
 static ssize_t users_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
@@ -476,8 +458,8 @@ DEVICE_ATTR_RO(users);
 /*
  * User can control the cpu hotplug operation as below:
  *
- * #echo 1 > /sys/power/cpuhp/enabled => enable
- * #echo 0 > /sys/power/cpuhp/enabled => disable
+ * #echo 1 > /sys/devices/platform/exynos-cpuphp/cpuhp/enabled => enable
+ * #echo 0 > /sys/devices/platform/exynos-cpuphp/cpuhp/enabled => disable
  *
  * If enabled become 0, hotplug driver enable the all cpus and no hotplug
  * operation happen from hotplug driver.
@@ -502,40 +484,11 @@ static ssize_t enabled_store(struct device *dev,
 }
 DEVICE_ATTR_RW(enabled);
 
-/*
- * User can control en/disable debug mode
- *
- * #echo 1 > /sys/power/cpuhp/debug => enable
- * #echo 0 > /sys/power/cpuhp/debug => disable
- *
- * When it is enabled, information is printed every time there is a cpu control
- */
-static ssize_t debug_show(struct device *dev,
-		struct device_attribute *attr, char *buf)
-{
-	return snprintf(buf, 10, "%d\n", cpuhp.debug);
-}
-
-static ssize_t debug_store(struct device *dev,
-		struct device_attribute *attr, const char *buf, size_t count)
-{
-	int input;
-
-	if (!sscanf(buf, "%d", &input))
-		return -EINVAL;
-
-	cpuhp.debug = !!input;
-
-	return count;
-}
-DEVICE_ATTR_RW(debug);
-
 static struct attribute *exynos_cpuhp_attrs[] = {
 	&dev_attr_set_online_cpu.attr,
 	&dev_attr_online_cpu.attr,
 	&dev_attr_users.attr,
 	&dev_attr_enabled.attr,
-	&dev_attr_debug.attr,
 	NULL,
 };
 
@@ -544,47 +497,16 @@ static struct attribute_group exynos_cpuhp_group = {
 	.attrs = exynos_cpuhp_attrs,
 };
 
-/******************************************************************************/
-/*                            Initialize Driver                               */
-/******************************************************************************/
-static void cpuhp_user_init(void)
-{
-	struct cpumask mask;
-
-	/* init user list */
-	INIT_LIST_HEAD(&cpuhp.users);
-
-	cpumask_copy(&mask, cpu_possible_mask);
-
-	/* register user for SYSFS */
-	cpumask_copy(&cpuhp.system_user.online_cpus, &mask);
-	strcpy(cpuhp.system_user.name, "SYSTEM");
-	list_add(&cpuhp.system_user.list, &cpuhp.users);
-
-	/* register user for SYSTEM */
-	cpumask_copy(&cpuhp.sysfs_user.online_cpus, &mask);
-	strcpy(cpuhp.sysfs_user.name, "SYSFS");
-	list_add(&cpuhp.sysfs_user.list, &cpuhp.users);
-
-	cpumask_copy(&cpuhp.online_cpus, cpu_online_mask);
-}
-
-static int max_cpus = CONFIG_VENDOR_NR_CPUS;
-module_param(max_cpus, int, 0);
-
 static int exynos_cpuhp_probe(struct platform_device *pdev)
 {
-	int cpu;
+	cpumask_copy(&cpuhp.online_cpus, cpu_online_mask);
 
-	/* Initialize pm_qos request and handler */
-	cpuhp_user_init();
+	INIT_LIST_HEAD(&cpuhp.users);
 
-	/* Initialize available cpus  */
-	for_each_possible_cpu(cpu) {
-		if (max_cpus > 0 && cpu >= max_cpus)
-			break;
-		cpumask_set_cpu(cpu, &cpuhp.available_cpus);
-	}
+	/* init and register SYSFS user */
+	cpumask_copy(&cpuhp.sysfs_user_mask, cpu_possible_mask);
+	if (exynos_cpuhp_register("SYSFS", cpuhp.sysfs_user_mask))
+		pr_err("Failed to register SYSFS user\n");
 
 	/* Create CPUHP sysfs */
 	if (sysfs_create_group(&pdev->dev.kobj, &exynos_cpuhp_group))
