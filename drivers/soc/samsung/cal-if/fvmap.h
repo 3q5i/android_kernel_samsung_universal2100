@@ -6,38 +6,38 @@
 
 /* FV(Frequency Voltage MAP) */
 struct fvmap_header {
-	unsigned char domain_id;
-	unsigned char num_of_lv;
-	unsigned char num_of_members;
-	unsigned char num_of_pll;
-	unsigned char num_of_mux;
-	unsigned char num_of_div;
-	unsigned short o_famrate;
-	unsigned char init_lv;
-	unsigned char num_of_child;
-	unsigned char parent_id;
-	unsigned char parent_offset;
-	unsigned short block_addr[BLOCK_ADDR_SIZE];
-	unsigned short o_members;
-	unsigned short o_ratevolt;
-	unsigned short o_tables;
+	u8 domain_id;
+	u8 num_of_lv;
+	u8 num_of_members;
+	u8 num_of_pll;
+	u8 num_of_mux;
+	u8 num_of_div;
+	u16 o_famrate;
+	u8 init_lv;
+	u8 num_of_child;
+	u8 parent_id;
+	u8 parent_offset;
+	u16 block_addr[BLOCK_ADDR_SIZE];
+	u16 o_members;
+	u16 o_ratevolt;
+	u16 o_tables;
 
-	unsigned int init_rate;
-	unsigned int min_rate;
-	unsigned int max_rate;
-	unsigned char child_id[CHILD_ID_NUM];
-	unsigned char copy_col;
+	u32 init_rate;
+	u32 min_rate;
+	u32 max_rate;
+	u8 child_id[CHILD_ID_NUM];
+	u8 copy_col;
 };
 
 struct clocks {
-	unsigned short addr[0];
+	u16 addr[0];
 };
 
 struct pll_header {
-	unsigned int addr;
-	unsigned short o_lock;
-	unsigned short level;
-	unsigned int pms[0];
+	u32 addr;
+	u16 o_lock;
+	u16 level;
+	u32 pms[0];
 };
 
 struct rate_volt {
@@ -50,12 +50,12 @@ struct rate_volt_header {
 };
 
 struct dvfs_table {
-	unsigned char val[0];
+	u8 val[0];
 };
 
 struct freq_volt {
-	unsigned int rate;
-	unsigned int volt;
+	u32 rate;
+	u32 volt;
 };
 
 #if defined(CONFIG_ACPM_DVFS) || defined(CONFIG_ACPM_DVFS_MODULE)
