@@ -301,12 +301,18 @@ out:
 #if defined(CONFIG_EXYNOS_ALT_DVFS) || defined(CONFIG_EXYNOS_ALT_DVFS_MODULE)
 	if (df->profile->get_dev_status && exynos_df->suspend_flag == false) {
 		unsigned long expires = jiffies;
-		mod_timer(&data->freq_timer, expires +
-			msecs_to_jiffies(data->alt_data.alt_param->min_sample_time * 2));
+
+		del_timer(&data->freq_timer);
+		data->freq_timer.expires = expires +
+			msecs_to_jiffies(data->alt_data.alt_param->min_sample_time * 2);
+		add_timer_on(&data->freq_timer, BOUND_CPU_NUM);
+
 		if (*freq > df->min_freq) {
 			/* timer is bound to cpu0 */
-			mod_timer(&data->freq_slack_timer, expires +
-					 msecs_to_jiffies(data->alt_data.alt_param->hold_sample_time));
+			del_timer(&data->freq_slack_timer);
+			data->freq_slack_timer.expires = expires +
+					 msecs_to_jiffies(data->alt_data.alt_param->hold_sample_time);
+			add_timer_on(&data->freq_slack_timer, BOUND_CPU_NUM);
 		} else if (timer_pending(&data->freq_slack_timer)) {
 			del_timer(&data->freq_slack_timer);
 		}
@@ -407,7 +413,7 @@ static int devfreq_simple_interactive_register_notifier(struct devfreq *df)
 	if (df->profile->get_dev_status) {
 		data->freq_timer.expires = jiffies +
 			msecs_to_jiffies(data->alt_data.alt_param->min_sample_time * 2);
-		add_timer(&data->freq_timer);
+		add_timer_on(&data->freq_timer, BOUND_CPU_NUM);
 		data->freq_slack_timer.expires = jiffies +
 			msecs_to_jiffies(data->alt_data.alt_param->hold_sample_time);
 		add_timer_on(&data->freq_slack_timer, BOUND_CPU_NUM);
