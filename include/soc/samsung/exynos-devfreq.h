@@ -108,7 +108,7 @@ struct devfreq_simple_interactive_data {
 	int pm_qos_class_max;
 	struct devfreq_notifier_block nb;
 	struct devfreq_notifier_block nb_max;
-
+	bool df_update_enable;
 #if defined(CONFIG_EXYNOS_ALT_DVFS) || defined(CONFIG_EXYNOS_ALT_DVFS_MODULE)
 	struct devfreq_alt_dvfs_data alt_data;
 	unsigned int governor_freq;

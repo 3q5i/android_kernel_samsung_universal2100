@@ -248,6 +248,9 @@ static int devfreq_simple_interactive_func(struct devfreq *df,
 
 	*freq = exynos_pm_qos_min;
 
+	if (!data->df_update_enable)
+		goto out;
+
 #if defined(CONFIG_EXYNOS_ALT_DVFS) || defined(CONFIG_EXYNOS_ALT_DVFS_MODULE)
 	stat = &df->last_status;
 
@@ -302,10 +305,17 @@ out:
 	if (df->profile->get_dev_status && exynos_df->suspend_flag == false) {
 		unsigned long expires = jiffies;
 
-		del_timer(&data->freq_timer);
-		data->freq_timer.expires = expires +
-			msecs_to_jiffies(data->alt_data.alt_param->min_sample_time * 2);
-		add_timer_on(&data->freq_timer, BOUND_CPU_NUM);
+		/*
+		 * If this function is triggered from timer path
+		 * OR (if the function is triggered from notifier path
+		 * AND there is no timer and we need to reporgram one.)
+		 */
+		if (data->df_update_enable || !timer_pending(&data->freq_timer)) {
+			del_timer(&data->freq_timer);
+			data->freq_timer.expires = expires +
+				msecs_to_jiffies(data->alt_data.alt_param->min_sample_time * 2);
+			add_timer_on(&data->freq_timer, BOUND_CPU_NUM);
+		}
 
 		if (*freq > df->min_freq) {
 			/* timer is bound to cpu0 */
@@ -329,6 +339,7 @@ out:
 static int devfreq_change_freq_task(void *data)
 {
 	struct devfreq *df = data;
+	struct devfreq_simple_interactive_data *data_alt = df->data;
 
 	while (!kthread_should_stop()) {
 		set_current_state(TASK_INTERRUPTIBLE);
@@ -338,7 +349,9 @@ static int devfreq_change_freq_task(void *data)
 		set_current_state(TASK_RUNNING);
 
 		mutex_lock(&df->lock);
+		data_alt->df_update_enable = true;
 		update_devfreq(df);
+		data_alt->df_update_enable = false;
 		mutex_unlock(&df->lock);
 	}
 
