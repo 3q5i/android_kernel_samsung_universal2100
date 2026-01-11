@@ -468,32 +468,6 @@ static int __mfc_itmon_notifier(struct notifier_block *nb, unsigned long action,
 }
 #endif
 
-#if IS_ENABLED(CONFIG_EXYNOS_SYSTEM_EVENT)
-extern struct notifier_block mfc_core_nb;
-
-static int __mfc_core_sysevent_desc_init(struct platform_device *pdev, struct mfc_core *core)
-{
-	int ret = 0;
-
-	core->sysevent_desc.name = core->name;
-	core->sysevent_desc.owner = THIS_MODULE;
-	core->sysevent_desc.shutdown = mfc_sysevent_shutdown;
-	core->sysevent_desc.powerup = mfc_sysevent_powerup;
-	core->sysevent_desc.crash_shutdown = mfc_sysevent_crash_shutdown;
-	core->sysevent_desc.dev = &pdev->dev;
-
-	core->sysevent_dev = sysevent_register(&core->sysevent_desc);
-	if (IS_ERR(core->sysevent_dev)) {
-		ret = PTR_ERR(core->sysevent_dev);
-		mfc_core_err("%s: sysevent_register failed :%d\n", pdev->name, ret);
-	} else {
-		mfc_core_info("%s: sysevent_register success\n", pdev->name);
-	}
-
-	return ret;
-}
-#endif
-
 /* MFC probe function */
 static int mfc_core_probe(struct platform_device *pdev)
 {
@@ -668,11 +642,9 @@ static int mfc_core_probe(struct platform_device *pdev)
 #endif
 
 #if IS_ENABLED(CONFIG_EXYNOS_SYSTEM_EVENT)
-	ret = __mfc_core_sysevent_desc_init(pdev, core);
+	ret = mfc_core_sysevent_desc_init(pdev, core);
 	if (ret)
 		goto err_alloc_debug;
-
-	sysevent_notif_register_notifier(core->sysevent_desc.name, &mfc_core_nb);
 #endif
 
 	dev_info(&pdev->dev, "%s is completed\n", __func__);
@@ -724,7 +696,9 @@ static int mfc_core_remove(struct platform_device *pdev)
 	struct mfc_core *core = platform_get_drvdata(pdev);
 
 	dev_dbg(&pdev->dev, "%s++\n", __func__);
-
+#if IS_ENABLED(CONFIG_EXYNOS_SYSTEM_EVENT)
+	mfc_core_sysevent_desc_deinit(core);
+#endif
 	iommu_unregister_device_fault_handler(&pdev->dev);
 	if (timer_pending(&core->meerkat_timer))
 		del_timer(&core->meerkat_timer);
@@ -817,10 +791,6 @@ static int mfc_core_resume(struct device *device)
 static int mfc_core_runtime_suspend(struct device *device)
 {
 	struct mfc_core *core = platform_get_drvdata(to_platform_device(device));
-#if IS_ENABLED(CONFIG_EXYNOS_SYSTEM_EVENT)
-	if (core->sysevent_dev)
-		sysevent_put((void *)core->sysevent_dev);
-#endif
 	mfc_core_debug(3, "mfc runtime suspend\n");
 
 	return 0;
@@ -834,16 +804,7 @@ static int mfc_core_runtime_idle(struct device *dev)
 static int mfc_core_runtime_resume(struct device *device)
 {
 	struct mfc_core *core = platform_get_drvdata(to_platform_device(device));
-#if IS_ENABLED(CONFIG_EXYNOS_SYSTEM_EVENT)
-	struct sysevent_desc *desc = &core->sysevent_desc;
-	void *retval = NULL;
 
-	if (core->sysevent_dev) {
-		retval = sysevent_get(desc->name);
-		if (IS_ERR(retval))
-			mfc_core_err("sysevent_get is failed in %s\n", desc->name);
-	}
-#endif
 	mfc_core_debug(3, "mfc runtime resume\n");
 
 	return 0;

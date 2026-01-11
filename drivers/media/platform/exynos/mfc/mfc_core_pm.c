@@ -17,6 +17,7 @@
 #include "mfc_core_qos.h"
 #include "mfc_core_pm.h"
 
+#include "mfc_sysevent.h"
 #include "mfc_core_hw_reg_api.h"
 
 void mfc_core_pm_init(struct mfc_core *core)
@@ -171,6 +172,10 @@ void mfc_core_pm_clock_off(struct mfc_core *core)
 
 int mfc_core_pm_power_on(struct mfc_core *core)
 {
+#if IS_ENABLED(CONFIG_EXYNOS_SYSTEM_EVENT)
+	struct sysevent_desc *desc = &core->sysevent_desc;
+	void *retval = NULL;
+#endif
 	struct mfc_dev *dev = core->dev;
 	struct mfc_platdata *pdata = dev->pdata;
 	int ret;
@@ -182,6 +187,16 @@ int mfc_core_pm_power_on(struct mfc_core *core)
 		call_dop(core, dump_and_stop_debug_mode, core);
 		goto err_power_on;
 	}
+
+#if IS_ENABLED(CONFIG_EXYNOS_SYSTEM_EVENT)
+	if (core->sysevent_dev) {
+		retval = sysevent_get(desc->name);
+		if (IS_ERR(retval)) {
+			mfc_core_err("sysevent_get is failed in %s\n", desc->name);
+			mfc_core_sysevent_desc_deinit(core);
+		}
+	}
+#endif
 
 #ifdef CONFIG_MFC_USE_BUS_DEVFREQ
 	if (pdata->idle_clk_ctrl) {
