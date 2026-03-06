@@ -32,6 +32,11 @@
 		printk(ITAG format, ## __VA_ARGS__); \
 }
 
+#define pr_booster_info(format, ...) { \
+	if (debug_flag) \
+		pr_info(ITAG format, ## __VA_ARGS__); \
+}
+
 #define IB_EVENT_TOUCH_BOOSTER 1
 #define MAX_MULTI_TOUCH_EVENTS		10
 #define MAX_IB_COUNT	100

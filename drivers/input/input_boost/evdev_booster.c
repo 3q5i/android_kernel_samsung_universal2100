@@ -450,9 +450,9 @@ static int __init ev_boost_init(void)
 {
 	int err;
 
-	pr_info(ITAG" Input Booster Module Init\n");
+	pr_booster_info(ITAG" Input Booster Module Init\n");
 	input_booster_init();
-	pr_info(ITAG" Input Booster Module Init End\n");
+	pr_booster_info(ITAG" Input Booster Module Init End\n");
 	spin_lock_init(&ib_ev_lock);
 	ib_notifier_register(&ib_event_notifier);
 	ev_unbound_wq =
