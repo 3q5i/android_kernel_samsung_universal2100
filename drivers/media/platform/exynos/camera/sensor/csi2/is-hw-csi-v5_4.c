@@ -1284,7 +1284,6 @@ int csi_hw_s_phy_set(struct phy *phy, u32 lanes, u32 mipi_speed,
 	phy_cfg[3] = mipi_speed;
 	phy_cfg[4] = settle;
 #endif
-#if defined(MODULE)
 	{
 		union phy_configure_opts opts;
 
@@ -1301,13 +1300,6 @@ int csi_hw_s_phy_set(struct phy *phy, u32 lanes, u32 mipi_speed,
 			return ret;
 		}
 	}
-#else
-	ret = phy_set(phy, 0, (void *)phy_cfg);
-	if (ret) {
-		err("failed to set PHY");
-		return ret;
-	}
-#endif
 	return ret;
 }
 
