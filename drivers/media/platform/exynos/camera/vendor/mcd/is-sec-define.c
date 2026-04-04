@@ -2218,7 +2218,7 @@ int is_sec_readcal_otprom_legacy(int rom_id)
 		is_i2c_write(client, 0xA02, 0x03);
 		is_i2c_write(client, 0xA00, 0x01);
 	}
-	is_i2c_read(client, cal_map_version, 0xA22, 0x4);
+	is_i2c_read(client, finfo->cal_map_ver, 0xA22, 0x4);
 
 	is_i2c_write(client, 0xA00, 0x04);
 	is_i2c_write(client, 0xA00, 0x00);
