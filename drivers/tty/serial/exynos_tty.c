@@ -1232,11 +1232,11 @@ static void s3c64xx_serial_qos_func(struct work_struct *work)
 	struct uart_port *port = &ourport->port;
 
 	if (ourport->mif_qos_val)
-		pm_qos_update_request_timeout(&ourport->exynos_uart_mif_qos,
+		exynos_pm_qos_update_request_timeout(&ourport->exynos_uart_mif_qos,
 				ourport->mif_qos_val, ourport->qos_timeout);
 
 	if (ourport->cpu_qos_val)
-		pm_qos_update_request_timeout(&ourport->exynos_uart_cpu_qos,
+		exynos_pm_qos_update_request_timeout(&ourport->exynos_uart_cpu_qos,
 				ourport->cpu_qos_val, ourport->qos_timeout);
 
 	if (ourport->uart_irq_affinity)
@@ -2863,11 +2863,11 @@ static int exynos_serial_probe(struct platform_device *pdev)
 						s3c64xx_serial_qos_func);
 		/* request pm qos */
 		if (ourport->mif_qos_val)
-			pm_qos_add_request(&ourport->exynos_uart_mif_qos,
+			exynos_pm_qos_add_request(&ourport->exynos_uart_mif_qos,
 						PM_QOS_BUS_THROUGHPUT, 0);
 
 		if (ourport->cpu_qos_val)
-			pm_qos_add_request(&ourport->exynos_uart_cpu_qos,
+			exynos_pm_qos_add_request(&ourport->exynos_uart_cpu_qos,
 						PM_QOS_CLUSTER1_FREQ_MIN, 0);
 	}
 #endif
@@ -3004,10 +3004,10 @@ static int exynos_serial_remove(struct platform_device *dev)
 
 #ifdef CONFIG_PM_DEVFREQ
 	if (ourport->mif_qos_val && ourport->qos_timeout)
-		pm_qos_remove_request(&ourport->exynos_uart_mif_qos);
+		exynos_pm_qos_remove_request(&ourport->exynos_uart_mif_qos);
 
 	if (ourport->cpu_qos_val && ourport->qos_timeout)
-		pm_qos_remove_request(&ourport->exynos_uart_cpu_qos);
+		exynos_pm_qos_remove_request(&ourport->exynos_uart_cpu_qos);
 #endif
 
 	if (port) {

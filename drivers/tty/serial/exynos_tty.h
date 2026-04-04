@@ -13,6 +13,7 @@
 */
 
 #include <linux/pm_qos.h>
+#include <soc/samsung/exynos_pm_qos.h>
 
 #define EXYNOS_UART_PORT_RESUME		0x0
 #define EXYNOS_UART_PORT_SUSPEND		0x3
@@ -137,8 +138,8 @@ struct exynos_uart_port {
 
 	struct platform_device		*pdev;
 
-	struct pm_qos_request		exynos_uart_mif_qos;
-	struct pm_qos_request		exynos_uart_cpu_qos;
+	struct exynos_pm_qos_request	exynos_uart_mif_qos;
+	struct exynos_pm_qos_request	exynos_uart_cpu_qos;
 	struct delayed_work		qos_work;
 
 	unsigned int			in_band_wakeup;
