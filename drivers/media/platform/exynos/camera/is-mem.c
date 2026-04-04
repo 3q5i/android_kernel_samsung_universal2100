@@ -37,7 +37,6 @@
 #include "is-core.h"
 #include "is-cmd.h"
 #include "is-err.h"
-#include <linux/exynos_iovmm.h>
 
 #if defined(CONFIG_VIDEOBUF2_DMA_SG)
 #define IS_IOMMU_PROP	(IOMMU_READ | IOMMU_WRITE)
