@@ -20,6 +20,7 @@
 #include <linux/delay.h>
 #include <linux/clk-provider.h>
 #include <linux/console.h>
+#include <linux/compat.h>
 #include <linux/dma-buf.h>
 #include <linux/ion.h>
 #include <uapi/linux/sched/types.h>
