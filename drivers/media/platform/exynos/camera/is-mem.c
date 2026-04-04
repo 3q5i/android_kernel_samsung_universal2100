@@ -33,6 +33,7 @@
 #include <linux/ion_exynos.h>
 #include <asm/cacheflush.h>
 #include <media/videobuf2-memops.h>
+#include <media/videobuf2-dma-sg.h>
 
 #include "is-core.h"
 #include "is-cmd.h"
@@ -84,7 +85,8 @@ static inline dma_addr_t is_vb2_dma_sg_plane_dvaddr(
 		struct is_vb2_buf *vbuf, u32 plane)
 
 {
-	return vb2_dma_sg_plane_dma_addr(&vbuf->vb.vb2_buf, plane);
+	struct sg_table *sgt = vb2_dma_sg_plane_desc(&vbuf->vb.vb2_buf, plane);
+	return sg_dma_address(sgt->sgl);
 }
 
 static inline ulong is_vb2_dma_sg_plane_kmap(

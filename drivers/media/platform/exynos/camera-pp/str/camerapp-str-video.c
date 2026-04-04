@@ -58,7 +58,8 @@ int _str_set_planesize(struct str_frame_cfg *frame_cfg)
 
 dma_addr_t _str_get_dma_addr(struct vb2_buffer *vb2_buf, u32 plane)
 {
-	return vb2_dma_sg_plane_dma_addr(vb2_buf, plane);
+	struct sg_table *sgt = vb2_dma_sg_plane_desc(vb2_buf, plane);
+	return sg_dma_address(sgt->sgl);
 }
 
 void *_str_get_kvaddr(struct vb2_buffer *vb2_buf, u32 plane)
