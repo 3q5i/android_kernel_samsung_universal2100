@@ -8,6 +8,7 @@
 #ifndef _ION_EXYNOS_PROT_H
 #define _ION_EXYNOS_PROT_H
 
+#include <linux/ion.h>
 #include <linux/of.h>
 
 /**

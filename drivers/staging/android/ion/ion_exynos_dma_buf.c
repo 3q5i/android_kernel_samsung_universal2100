@@ -13,11 +13,11 @@
 #include <linux/dma-mapping.h>
 #include <linux/dma-noncoherent.h>
 #include <linux/iommu.h>
+#include <linux/ion_exynos_prot.h>
 #include <uapi/linux/dma-buf.h>
 
 #include "ion_private.h"
 #include "ion_bltin.h"
-#include "exynos/ion_exynos_prot.h"
 
 struct ion_iovm_map {
 	struct list_head list;

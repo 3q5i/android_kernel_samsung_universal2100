@@ -17,7 +17,6 @@
 #include <linux/of_reserved_mem.h>
 #include <linux/kernel.h>
 
-#include "ion_exynos.h"
 #include "ion_debug.h"
 
 struct ion_exynos_cma_heap {

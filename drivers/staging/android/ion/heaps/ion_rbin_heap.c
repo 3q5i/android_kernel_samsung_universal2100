@@ -26,6 +26,7 @@
 #include <linux/kthread.h>
 #include <linux/freezer.h>
 #include <linux/ion.h>
+#include <linux/ion_exynos.h>
 #include <asm/cacheflush.h>
 
 #ifndef CONFIG_ION_MSM_HEAPS
@@ -35,7 +36,6 @@
 
 #include "ion_page_pool.h"
 #include "../ion_bltin.h"
-#include "../exynos/ion_exynos_prot.h"
 
 #define ION_HEAP_TYPE_RBIN (ION_HEAP_TYPE_MAX - 1)
 

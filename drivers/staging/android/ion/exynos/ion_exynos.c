@@ -19,8 +19,6 @@
 #include <linux/iommu.h>
 #include <uapi/linux/dma-buf.h>
 
-#include "ion_exynos.h"
-#include "ion_exynos_prot.h"
 #include "ion_debug.h"
 
 void ion_exynos_heap_init(struct ion_exynos_heap *exynos_heap)

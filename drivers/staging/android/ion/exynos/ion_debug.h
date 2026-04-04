@@ -9,8 +9,7 @@
 #define _ION_DEBUG_H
 
 #include <linux/seq_file.h>
-
-#include "ion_exynos.h"
+#include <linux/ion_exynos.h>
 
 enum ion_event_type {
 	ION_EVENT_TYPE_ALLOC = 0,

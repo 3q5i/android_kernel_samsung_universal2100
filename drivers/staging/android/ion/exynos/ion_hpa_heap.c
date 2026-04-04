@@ -23,9 +23,9 @@
 #include <linux/smc.h>
 #include <linux/kmemleak.h>
 #include <linux/dma-mapping.h>
+#include <linux/ion_exynos_prot.h>
 #include <soc/samsung/exynos-smc.h>
 
-#include "ion_exynos_prot.h"
 #include "../ion_bltin.h"
 
 static struct device hpa_dev;

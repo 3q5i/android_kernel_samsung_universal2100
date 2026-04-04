@@ -15,7 +15,7 @@
 
 #include <linux/ion.h>
 
-#include "ion_exynos.h"
+#include <linux/ion_exynos.h>
 
 #define ION_SECURE_DMA_BASE	0x80000000
 #define ION_SECURE_DMA_END	0xE0000000

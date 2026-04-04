@@ -10,8 +10,22 @@
 
 #include <uapi/linux/ion.h>
 #include <linux/of_reserved_mem.h>
+#include <linux/ion_exynos_prot.h>
 
-#include "ion_exynos_prot.h"
+/*
+ * the allocated buffer is not cleared with zeroes to avoid initialization
+ * overhead. Mapping to userspace is not allowed.
+ */
+#define ION_FLAG_NOZEROED 8
+
+/*
+ * the allocated buffer is not allowed to access without a proper permission.
+ * Both of mmap() and dmabuf kmap/vmap will fail. Acessing by any other mapping
+ * will generate data abort exception and get oops.
+ * ION_FLAG_PROTECTED is only applicable to the heaps with security property.
+ * Other heaps ignore this flag.
+ */
+#define ION_FLAG_PROTECTED 16
 
 void ion_page_clean(struct page *pages, unsigned long size);
 

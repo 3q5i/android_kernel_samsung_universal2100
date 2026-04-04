@@ -18,7 +18,6 @@
 #include <linux/highmem.h>
 #include <linux/ion.h>
 
-#include "ion_exynos.h"
 #include "ion_debug.h"
 
 struct ion_carveout_heap {

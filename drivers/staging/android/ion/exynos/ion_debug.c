@@ -12,9 +12,7 @@
 #include <linux/debugfs.h>
 #include <linux/list_sort.h>
 
-#include "ion_exynos.h"
 #include "ion_debug.h"
-#include "ion_exynos_prot.h"
 
 static const char *ion_heap_dump_type(enum ion_heap_type type)
 {
