@@ -53,7 +53,7 @@
 #if IS_ENABLED(CONFIG_EXYNOS_SNAPSHOT)
 #include <linux/exynos-ss.h>
 #elif defined(CONFIG_DEBUG_SNAPSHOT)
-#include <linux/debug-snapshot.h>
+#include <soc/samsung/debug-snapshot.h>
 #endif
 #include <soc/samsung/debug-snapshot.h>
 #include <soc/samsung/exynos-bcm_dbg.h>
