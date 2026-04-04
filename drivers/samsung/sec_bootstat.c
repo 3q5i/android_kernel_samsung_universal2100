@@ -326,10 +326,10 @@ static int sec_enhanced_boot_stat_proc_show(struct seq_file *m, void *v)
 	seq_printf(m, "%-90s %6u %6u %6u %4d %4d %4d\n", "!@Boot_EBS_B: start_kernel_timer", mct_start, 0, mct_start - boot_time_bl3, 0, 0, 0);
 
 #if IS_BUILTIN(CONFIG_SEC_BOOTSTAT)
-	for (i = 0; i < ARRAY_SIZE(boot_initcall); i++) {
-		seq_printf(m, "%-90s %6u %6u %6u %4d %4d\n", boot_initcall[i].string, boot_initcall[i].time + mct_start, boot_initcall[i].time,
-				boot_initcall[i].time - last_time, boot_initcall[i].freq[0] / 1000, boot_initcall[i].freq[1] / 1000);
-		last_time = boot_initcall[i].time;
+	for (i = 0; i < ARRAY_SIZE(sec_boot_initcall); i++) {
+		seq_printf(m, "%-90s %6u %6u %6u %4d %4d\n", sec_boot_initcall[i].string, sec_boot_initcall[i].time + mct_start, sec_boot_initcall[i].time,
+				sec_boot_initcall[i].time - last_time, sec_boot_initcall[i].freq[0] / 1000, sec_boot_initcall[i].freq[1] / 1000);
+		last_time = sec_boot_initcall[i].time;
 	}
 #endif
 	seq_puts(m, "------------------------------------------------------------------------------------------------------------------------------\n");
