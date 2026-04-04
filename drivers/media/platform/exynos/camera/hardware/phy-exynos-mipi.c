@@ -1846,7 +1846,6 @@ static int exynos_mipi_phy_power_off(struct phy *phy)
 	return ret;
 }
 
-#if defined(MODULE)
 static int exynos_mipi_phy_configure(struct phy *phy, union phy_configure_opts *opts)
 {
 	struct mipi_phy_desc *phy_desc = phy_get_drvdata(phy);
@@ -1861,15 +1860,6 @@ static int exynos_mipi_phy_configure(struct phy *phy, union phy_configure_opts *
 
 	return __set_phy_cfg(state, phy_desc, 0, cfg);
 }
-#else
-static int exynos_mipi_phy_set(struct phy *phy, int option, void *info)
-{
-	struct mipi_phy_desc *phy_desc = phy_get_drvdata(phy);
-	struct exynos_mipi_phy *state = to_mipi_video_phy(phy_desc);
-
-	return __set_phy_cfg(state, phy_desc, option, info);
-}
-#endif
 
 static struct phy *exynos_mipi_phy_of_xlate(struct device *dev,
 					struct of_phandle_args *args)
@@ -1886,11 +1876,7 @@ static struct phy_ops exynos_mipi_phy_ops = {
 	.init		= exynos_mipi_phy_init,
 	.power_on	= exynos_mipi_phy_power_on,
 	.power_off	= exynos_mipi_phy_power_off,
-#if defined(MODULE)
 	.configure	= exynos_mipi_phy_configure,
-#else
-	.set		= exynos_mipi_phy_set,
-#endif
 	.owner		= THIS_MODULE,
 };
 
