@@ -9,11 +9,6 @@
  * published by the Free Software Foundation.
  */
 
-#ifdef CONFIG_SND_SOC_SAMSUNG_AUDIO
-#include <kunit/test.h>
-#include <kunit/mock.h>
-#endif
-
 #include <linux/clk.h>
 #include <linux/io.h>
 #include <linux/module.h>
@@ -4051,9 +4046,3 @@ MODULE_AUTHOR("Gyeongtaek Lee, <gt82.lee@samsung.com>");
 MODULE_DESCRIPTION("Samsung ASoC A-Box Driver");
 MODULE_ALIAS("platform:abox");
 MODULE_LICENSE("GPL");
-
-#ifdef CONFIG_SND_SOC_SAMSUNG_AUDIO
-#ifdef CONFIG_ABOX_TEST
-#include "./kunit_test/abox_test.c"
-#endif
-#endif
