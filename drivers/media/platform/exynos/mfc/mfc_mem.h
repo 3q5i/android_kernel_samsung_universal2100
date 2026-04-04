@@ -21,7 +21,9 @@
 
 #include "mfc_common.h"
 
+#if IS_ENABLED(CONFIG_MFC_USE_DMA_SKIP_LAZY_UNMAP)
 extern void vb2_dma_sg_set_map_attr(void *mem_priv, unsigned long attr);
+#endif
 
 /* Offset base used to differentiate between CAPTURE and OUTPUT
 *  while mmaping */

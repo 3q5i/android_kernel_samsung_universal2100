@@ -56,7 +56,8 @@ struct vb2_dma_sg_buf {
 
 static void vb2_dma_sg_put(void *buf_priv);
 
-static void vb2_dma_sg_set_map_attr(void *mem_priv, unsigned long attr)
+#if IS_ENABLED(CONFIG_MFC_USE_DMA_SKIP_LAZY_UNMAP)
+void vb2_dma_sg_set_map_attr(void *mem_priv, unsigned long attr)
 {
 	struct vb2_dma_sg_buf *buf = mem_priv;
 
@@ -68,6 +69,7 @@ static void vb2_dma_sg_set_map_attr(void *mem_priv, unsigned long attr)
 	buf->db_attach->dma_map_attrs |= attr;
 }
 EXPORT_SYMBOL_GPL(vb2_dma_sg_set_map_attr);
+#endif
 
 static int vb2_dma_sg_alloc_compacted(struct vb2_dma_sg_buf *buf,
 		gfp_t gfp_flags)
