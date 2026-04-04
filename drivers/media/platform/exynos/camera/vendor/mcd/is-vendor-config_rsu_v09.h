@@ -87,8 +87,6 @@
 #define CAMERA_CSI_A_PHY_CFG (0x8061) /* R9S Front */
 #define CAMERA_CSI_C_PHY_CFG (0x8062) /* R9S Wide */
 
-#define CONFIG_LEDS_KTD2692
-
 /* This for dualization between eeprom sensor and otprom sensor */
 #define USE_CAMERA_DUALIZED
 #ifdef USE_CAMERA_DUALIZED
