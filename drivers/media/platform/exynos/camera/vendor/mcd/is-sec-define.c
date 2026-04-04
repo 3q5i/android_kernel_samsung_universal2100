@@ -2279,16 +2279,10 @@ crc_retry:
 			goto key_err;
 		} else {
 			pr_info("dump folder exist, Dump OTPROM cal data.\n");
-			if (rom_id == ROM_ID_FRONT) {
-				if (write_data_to_file(IS_CAL_DUMP_FRONT, buf, IS_DUMP_CAL_SIZE, &pos) < 0) {
-					pr_info("Failed to dump cal data.\n");
-					goto dump_err;
-				}
-			} else {
-				if (write_data_to_file(IS_CAL_DUMP, buf, IS_DUMP_CAL_SIZE, &pos) < 0) {
-					pr_info("Failed to dump cal data.\n");
-					goto dump_err;
-				}
+			if (write_data_to_file(otprom_cal_dump_path[rom_id],
+						buf, IS_DUMP_CAL_SIZE, &pos) < 0) {
+				pr_info("Failed to dump cal data.\n");
+				goto dump_err;
 			}
 		}
 	}
