@@ -1,14 +1,9 @@
+// SPDX-License-Identifier: GPL-2.0
 /*
- * linux/mm/hpa.c
- *
- * Copyright (C) 2015 Samsung Electronics, Inc. All Rights Reserved.
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version
- * 2 of the License, or (at your option) any later version.
-
+ * High-order Page Allocator
  * Does best efforts to allocate required high-order pages.
+ *
+ * Copyright (C) 2021 Samsung Electronics Co., Ltd.
  */
 
 #define pr_fmt(fmt) "HPA: " fmt
@@ -31,6 +26,10 @@
 #include <linux/sched/task.h>
 #include <linux/sched/mm.h>
 #include <linux/random.h>
+
+#ifndef buddy_order_unsafe
+#define buddy_order_unsafe(page)	page_private(page)
+#endif
 
 #include "internal.h"
 
@@ -116,7 +115,7 @@ static int hpa_killer(void)
 		return -ESRCH;
 	}
 
-	pr_info("Killing '%s' (%d), adj %d to free %lukB\n",
+	pr_info("Killing '%s' (%d), adj %hd to free %lukB\n",
 		selected->comm, task_pid_nr(selected), selected_adj,
 		selected_tasksize * (PAGE_SIZE / SZ_1K));
 
@@ -127,20 +126,71 @@ static int hpa_killer(void)
 	return 0;
 }
 
-static bool is_movable_chunk(unsigned long pfn, unsigned int order)
+enum hpa_reclaim_status {
+	HPA_SKIP_CMA_OR_ISOLATE_MIGRATETYPE,
+	HPA_SKIP_INVALID_PFN,
+	HPA_SKIP_RESERVED,
+	HPA_SKIP_ANON_PINNED,
+	HPA_SKIP_COMPOUND,
+	HPA_SKIP_UNMOVABLE,
+	HPA_STEAL_FAIL_EBUSY,
+	HPA_STEAL_FAIL,
+	HPA_STEAL_SUCCESS,
+	NUM_HPA_RECLAIM_STATS,
+};
+
+const char * const hpa_reclaim_status_text[] = {
+	"skip cma or isolate migratetype",
+	"skip invalid pfn",
+	"skip reserved page",
+	"skip anonmyous pinned page",
+	"skip compound page",
+	"skip unmovable page",
+	"reclaim fail (-EBUSY)",
+	"reclaim fail",
+	"reclaim success",
+};
+
+static bool is_movable_chunk(unsigned long start_pfn, unsigned int order, unsigned int *status)
 {
-	struct page *page = pfn_to_page(pfn);
-	struct page *page_end = pfn_to_page(pfn + (1 << order));
+	unsigned long i, end_pfn = start_pfn + (1 << order);
+	struct page *page;
 
-	while (page != page_end) {
-		if (!pfn_valid(pfn++))
+	for (i = start_pfn; i < end_pfn; i++) {
+		page = pfn_to_online_page(i);
+		if (!page) {
+			status[HPA_SKIP_INVALID_PFN]++;
 			return false;
-		if (PageCompound(page) || PageReserved(page))
-			return false;
-		if (!PageLRU(page) && !__PageMovable(page))
-			return false;
+		}
 
-		page += PageBuddy(page) ? 1 << page_order(page) : 1;
+		if (PageBuddy(page)) {
+			unsigned long freepage_order = buddy_order_unsafe(page);
+
+			if (freepage_order > 0 && freepage_order < MAX_ORDER)
+				i += (1UL << freepage_order) - 1;
+
+			continue;
+		}
+
+		if (PageCompound(page)) {
+			status[HPA_SKIP_COMPOUND]++;
+			return false;
+		}
+
+		if (PageReserved(page)) {
+			status[HPA_SKIP_RESERVED]++;
+			return false;
+		}
+
+		if (!PageLRU(page) && !__PageMovable(page)) {
+			status[HPA_SKIP_UNMOVABLE]++;
+			return false;
+		}
+
+		if (!page_mapping(page) && page_count(page) > page_mapcount(page)) {
+			status[HPA_SKIP_ANON_PINNED]++;
+			return false;
+		}
 	}
 
 	return true;
@@ -286,7 +336,8 @@ static unsigned long get_scan_pfn(unsigned long base_pfn, unsigned long end_pfn)
 }
 
 static int steal_highorder_pages_block(struct page *pages[], unsigned int order,
-				       int required, unsigned long block_pfn)
+				       int required, unsigned long block_pfn,
+				       unsigned int *status)
 {
 	unsigned long end_pfn = block_pfn + pageblock_nr_pages;
 	unsigned int pfn;
@@ -302,30 +353,40 @@ static int steal_highorder_pages_block(struct page *pages[], unsigned int order,
 		 * causes isolated page block remained in isolated state
 		 * forever.
 		 */
-		if (is_migrate_cma(mt) || is_migrate_isolate(mt))
+		if (is_migrate_cma(mt) || is_migrate_isolate(mt)) {
+			status[HPA_SKIP_CMA_OR_ISOLATE_MIGRATETYPE]++;
 			return 0;
+		}
 
-		if (!is_movable_chunk(pfn, order))
+		if (!is_movable_chunk(pfn, order, status))
 			continue;
 
 		ret = alloc_contig_range_fast(pfn, pfn + (1 << order), mt);
 		if (ret == 0) {
 			prep_highorder_pages(pfn, order);
 			pages[picked++] = pfn_to_page(pfn);
+			status[HPA_STEAL_SUCCESS]++;
+
 			if (picked == required)
 				break;
+		} else {
+			if (ret == -EBUSY)
+				status[HPA_STEAL_FAIL_EBUSY]++;
+			else
+				status[HPA_STEAL_FAIL]++;
 		}
 	}
 
 	return picked;
 }
 
-static int steal_highorder_pages(struct page *pages[], int required,
-				 unsigned int order,
+#define pageblock_end_pfn(pfn)		ALIGN((pfn) + 1, pageblock_nr_pages)
+static int steal_highorder_pages(struct page *pages[], int required, unsigned int order,
 				 unsigned long base_pfn, unsigned long end_pfn,
-				 phys_addr_t exception_areas[][2],
-				 int nr_exception)
+				 phys_addr_t exception_areas[][2], int nr_exception,
+				 unsigned int *status)
 {
+	struct zone *zone;
 	unsigned long pfn;
 	int picked = 0;
 
@@ -350,11 +411,15 @@ static int steal_highorder_pages(struct page *pages[], int required,
 			continue;
 		}
 
-		if (!pfn_valid_within(pfn))
+		if (!pfn_valid(pfn))
 			continue;
 
-		picked += steal_highorder_pages_block(pages + picked, order,
-						      required - picked, pfn);
+		zone = page_zone(pfn_to_page(pfn));
+		if (!pageblock_pfn_to_page(pfn, pageblock_end_pfn(pfn), zone))
+			continue;
+
+		picked += steal_highorder_pages_block(pages + picked, order, required - picked,
+						      pfn, status);
 		if (picked == required)
 			break;
 	}
@@ -394,9 +459,11 @@ int alloc_pages_highorder_except(int order, struct page **pages, int nents,
 	int i;
 
 	base_pfn = ALIGN(base_pfn, pageblock_nr_pages);
+	end_pfn = ALIGN_DOWN(end_pfn, pageblock_nr_pages);
 
 	while (true) {
 		struct zone *zone;
+		unsigned int status[NUM_HPA_RECLAIM_STATS] = {0, };
 
 		for_each_zone(zone) {
 			if (zone->spanned_pages == 0)
@@ -411,19 +478,22 @@ int alloc_pages_highorder_except(int order, struct page **pages, int nents,
 
 		scan_pfn = get_scan_pfn(base_pfn, end_pfn);
 
-		migrate_prep();
+		lru_add_drain_all();
 
 		picked += steal_highorder_pages(pages + picked, nents - picked,
 						order, scan_pfn, end_pfn,
-						exception_areas, nr_exception);
+						exception_areas, nr_exception, status);
 		if (picked == nents)
 			return 0;
 
 		picked += steal_highorder_pages(pages + picked, nents - picked,
 						order, base_pfn, scan_pfn,
-						exception_areas, nr_exception);
+						exception_areas, nr_exception, status);
 		if (picked == nents)
 			return 0;
+
+		for (i = 0; i < NUM_HPA_RECLAIM_STATS; i++)
+			pr_info("%s -> %d\n", hpa_reclaim_status_text[i], status[i]);
 
 		/* picked < nents */
 		drop_slab();
@@ -440,6 +510,8 @@ int alloc_pages_highorder_except(int order, struct page **pages, int nents,
 
 	pr_err("grabbed only %d/%d %d-order pages\n",
 	       nents - picked, nents, order);
+
+	show_mem(0, 0);
 
 	return -ENOMEM;
 }
