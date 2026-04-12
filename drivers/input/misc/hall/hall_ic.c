@@ -51,7 +51,7 @@
  * Switch events
  */
 #define SW_FOLDER		0x00  /* set = folder open, close*/
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 10, 0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0))
 #define SW_FLIP			0x10  /* set = flip cover open, close*/
 #define SW_CERTIFYHALL		0x0b  /* set = certify_hall attach/detach */
 #define SW_WACOM_HALL			0x0c	/* set = tablet wacom hall attach/detach(set wacom cover mode) */
@@ -399,7 +399,7 @@ static void hall_ic_work(struct work_struct *work)
 		stui_cancel_session();
 #endif
 #if IS_ENABLED(CONFIG_TOUCHSCREEN_DUAL_FOLDABLE) || IS_ENABLED(CONFIG_SEC_INPUT_MULTI_DEVICE)
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 10, 0))
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0))
 #if IS_ENABLED(CONFIG_USB_HW_PARAM)
 	if (strncmp(hall->name, "flip", 4) == 0) {
 		struct otg_notify *o_notify = get_otg_notify();
@@ -640,7 +640,7 @@ static struct hall_ic_pdata *hall_ic_parsing_dt(struct device *dev)
 			pr_err("failed to get event: 0x%x\n", hall->event);
 			return ERR_PTR(-EINVAL);
 		}
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 10, 0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0))
 		if (hall->event == 0x15) { /* SW_FLIP */
 			hall->event = SW_LID;
 		} else if (hall->event == 0x1b) {	/* SW_CERTIFYHALL */
