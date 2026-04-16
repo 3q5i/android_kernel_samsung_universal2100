@@ -1,0 +1,2854 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos2100 SoC EMS device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ */
+
+#include <dt-bindings/soc/samsung/ems.h>
+
+/ {
+	exynos_msn: exynos-msn {
+		compatible = "samsung,exynos-msn";
+		status = "okay";
+	};
+
+	ems: ems {
+		compatible = "samsung,ems";
+		status = "okay";
+
+		pe-list {
+			list@0 {
+				cpus = "0-3", "4-6", "7";
+			};
+			list@1 {
+				cpus = "4-6", "7", "0-3";
+			};
+			list@2 {
+				cpus = "7", "4-6", "0-3";
+			};
+		};
+
+		frt {
+			coregroup0 {
+				active-ratio = <25>;
+			};
+			coregroup1 {
+				active-ratio = <100>;
+			};
+			coregroup2 {
+				active-ratio = <100>;
+			};
+		};
+
+		esg {
+			thread-run-on = "0-6";
+			domain@0 {
+				shared-cpus = "0-3";
+				step = <4>;
+				patient-mode = <0>;
+				pelt-margin = <25>;
+				pelt-boost = <0>;
+			};
+			domain@1 {
+				device_type = "esgov-pol4";
+				shared-cpus = "4-6";
+				step = <6>;
+				patient-mode = <0>;
+				pelt-margin = <25>;
+				pelt-boost = <0>;
+			};
+			domain@2 {
+				shared-cpus = "7";
+				step = <8>;
+				patient-mode = <0>;
+				pelt-margin = <25>;
+				pelt-boost = <0>;
+			};
+		};
+
+		ontime {
+			domain0 {
+				cpus = "0-3";
+				lower-boundary = <0>;
+				upper-boundary = <105>;
+			};
+			domain1 {
+				cpus = "4-7";
+				lower-boundary = <106>;
+				upper-boundary = <1024>;
+			};
+		};
+
+		emstune {
+			mode-map {
+				mode0 {
+					desc = "normal";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set0>;
+					};
+
+					level1 {
+						set = <&set0_1>;
+					};
+
+					level2 {
+						set = <&set0_2>;
+					};
+				};
+
+				mode1 {
+					desc = "power-scenario";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set1>;
+					};
+
+					level1 {
+						set = <&set1_1>;
+					};
+
+					level2 {
+						set = <&set1_2>;
+					};
+				};
+
+				mode2 {
+					desc = "performance";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set2>;
+					};
+
+					level1 {
+						set = <&set2_1>;
+					};
+
+					level2 {
+						set = <&set2_2>;
+					};
+				};
+
+				mode3 {
+					desc = "game";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set3>;
+					};
+
+					level1 {
+						set = <&set3_1>;
+					};
+
+					level2 {
+						set = <&set3_2>;
+					};
+				};
+
+				mode4 {
+					desc = "balance";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set4>;
+					};
+
+					level1 {
+						set = <&set4_1>;
+					};
+
+					level2 {
+						set = <&set4_2>;
+					};
+				};
+
+				mode5 {
+					desc = "camera";
+					boost_level = <2>;
+					sub_mode_count = <5>;
+
+					level0 {
+						set = <&set5>;
+					};
+
+					level1 {
+						set = <&set5_1>;
+					};
+
+					level2 {
+						set = <&set5_2>;
+					};
+				};
+
+				mode6 {
+					desc = "camera sub mode 1";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set6>;
+					};
+
+					level1 {
+						set = <&set5_1>;
+					};
+
+					level2 {
+						set = <&set5_2>;
+					};
+				};
+
+				mode7 {
+					desc = "camera sub mode 2";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set7>;
+					};
+
+					level1 {
+						set = <&set5_1>;
+					};
+
+					level2 {
+						set = <&set5_2>;
+					};
+				};
+
+				mode8 {
+					desc = "camera sub mode 3";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set8>;
+					};
+
+					level1 {
+						set = <&set5_1>;
+					};
+
+					level2 {
+						set = <&set5_2>;
+					};
+				};
+
+				mode9 {
+					desc = "camera sub mode 4";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set9>;
+					};
+
+					level1 {
+						set = <&set5_1>;
+					};
+
+					level2 {
+						set = <&set5_2>;
+					};
+				};
+
+				mode10 {
+					desc = "gameSDK";
+					boost_level = <2>;
+					sub_mode_count = <5>;
+
+					level0 {
+						set = <&set10>;
+					};
+
+					level1 {
+						set = <&set10_1>;
+					};
+
+					level2 {
+						set = <&set10_2>;
+					};
+				};
+
+				mode11 {
+					desc = "gameSDK sub mode 1";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set11>;
+					};
+
+					level1 {
+						set = <&set10_1>;
+					};
+
+					level2 {
+						set = <&set10_2>;
+					};
+				};
+
+				mode12 {
+					desc = "gameSDK sub mode 2";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set12>;
+					};
+
+					level1 {
+						set = <&set10_1>;
+					};
+
+					level2 {
+						set = <&set10_2>;
+					};
+				};
+
+				mode13 {
+					desc = "gameSDK sub mode 3";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set13>;
+					};
+
+					level1 {
+						set = <&set10_1>;
+					};
+
+					level2 {
+						set = <&set10_2>;
+					};
+				};
+
+				mode14 {
+					desc = "gameSDK sub mode 4";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set14>;
+					};
+
+					level1 {
+						set = <&set10_1>;
+					};
+
+					level2 {
+						set = <&set10_2>;
+					};
+				};
+
+				mode15 {
+					desc = "browser";
+					boost_level = <2>;
+
+					level0 {
+						set = <&set15>;
+					};
+
+					level1 {
+						set = <&set15_1>;
+					};
+
+					level2 {
+						set = <&set15_2>;
+					};
+				};
+			};
+		};
+	};
+
+	set0: set@0000 {
+		idx = <0>;
+		desc = "normal default";
+
+		sched_policy {
+			root = <0>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <130 130 100>;
+			foreground = <130 130 100>;
+			background = <100 100 100>;
+			top-app = <100 200 100>;
+		};
+
+		idle_weight {
+			root = <260 260 200>;
+			foreground = <260 260 200>;
+			background = <100 100 100>;
+			top-app = <200 400 200>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <5 5 5>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <40 20 20>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <4 6 8>;
+			patient-mode = <0 0 0>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <1>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <660>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <550>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 100 100>;
+		};
+
+		ecs {
+			stage0 {
+				cpus = "0-5";
+				monitor-cpus = "4-5";
+				busy-threshold = <544>;
+			};
+			stage1 {
+				cpus = "0-6";
+				monitor-cpus = "4-6";
+				busy-threshold = <863>;
+			};
+			stage2 {
+				cpus = "0-7";
+				monitor-cpus = "4-7";
+				busy-threshold = <1237>;
+			};
+		};
+
+		tiny_cd_sched {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+		};
+	};
+
+	set0_1: set@0001 {
+		idx = <1>;
+		desc = "normal touch boost";
+
+		sched_policy {
+			root = <1>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <130 130 100>;
+			foreground = <65 450 350>;
+			background = <100 100 100>;
+			top-app = <65 450 350>;
+		};
+
+		idle_weight {
+			root = <130 130 100>;
+			foreground = <130 1300 1000>;
+			background = <100 100 100>;
+			top-app = <130 1300 1000>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <5 5 5>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <660>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <550>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+
+		tiny_cd_sched {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+		};
+	};
+
+	set0_2: set@0002 {
+		idx = <2>;
+		desc = "normal extreme boost";
+
+		sched_policy {
+			root = <0>;
+			foreground = <2>;
+			background = <0>;
+			top-app = <2>;
+		};
+
+		weight {
+			root = <65 130 100>;
+			foreground = <65 130 100>;
+			background = <65 100 100>;
+			top-app = <65 130 100>;
+		};
+
+		idle_weight {
+			root = <130 260 200>;
+			foreground = <130 260 200>;
+			background = <130 200 200>;
+			top-app = <130 260 200>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <660>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <550>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+			mask = "4-7";
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+
+		tiny_cd_sched {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+		};
+	};
+
+	set1: set@0100 {
+		idx = <100>;
+		desc = "power-scenario default";
+
+		sched_policy {
+			root = <1>;
+			foreground = <1>;
+			background = <1>;
+			top-app = <1>;
+		};
+
+		weight {
+			root = <1280 200 25>;
+			foreground = <1280 200 25>;
+			background = <1280 200 25>;
+			top-app = <1280 200 25>;
+		};
+
+		idle_weight {
+			root = <2560 400 50>;
+			foreground = <2560 400 50>;
+			background = <2560 400 50>;
+			top-app = <2560 400 50>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <10 8 10>;
+			patient-mode = <1 1 1>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <105>;
+				};
+				domain1 {
+					cpus = "4-7";
+					lower-boundary = <106>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <90 100 100>;
+		};
+	};
+
+	set1_1: set@0101 {
+		idx = <101>;
+		desc = "power-scenario touch boost";
+
+		sched_policy {
+			root = <0>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <1280 200 25>;
+			foreground = <100 100 100>;
+			background = <1280 200 25>;
+			top-app = <100 100 100>;
+		};
+
+		idle_weight {
+			root = <2560 400 50>;
+			foreground = <250 1000 1000>;
+			background = <2560 400 50>;
+			top-app = <250 1000 1000>;
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+	};
+
+	set1_2: set@0102 {
+		idx = <102>;
+		desc = "power-scenario extreme boost";
+
+		sched_policy {
+			root = <0>;
+			foreground = <2>;
+			background = <0>;
+			top-app = <2>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 100 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <200 200 200>;
+			background = <200 200 200>;
+			top-app = <200 200 200>;
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+			mask = "4-7";
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+	};
+
+	set2: set@0200 {
+		idx = <200>;
+		desc = "performance default";
+
+		sched_policy {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 150 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <200 200 200>;
+			background = <200 200 200>;
+			top-app = <200 300 200>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <5 5 5>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <75 75 75>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <4 6 8>;
+			patient-mode = <0 0 0>;
+			pelt-margin = <400 400 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <8>;
+			rapid-scale-up = <1>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <20>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <10>;
+					upper-boundary = <500>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <400>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 100 100>;
+		};
+	};
+
+	set2_1: set@0201 {
+		idx = <201>;
+		desc = "performance touch boost";
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 150 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <250 1000 1000>;
+			background = <200 200 200>;
+			top-app = <250 1000 1000>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <40 40 40>;
+		};
+
+		esg {
+			step = <4 6 8>;
+			patient-mode = <0 0 0>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <8>;
+			rapid-scale-up = <1>;
+			rapid-scale-down = <0>;
+		};
+	};
+
+	set2_2: set@0202 {
+		idx = <202>;
+		desc = "performance extreme boost";
+
+		sched_policy {
+			root = <0>;
+			foreground = <2>;
+			background = <0>;
+			top-app = <2>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 150 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <200 200 200>;
+			background = <200 200 200>;
+			top-app = <200 300 200>;
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+			mask = "4-7";
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+	};
+
+	set3: set@0300 {
+		idx = <300>;
+		desc = "game default";
+
+		sched_policy {
+			root = <5>;
+			foreground = <5>;
+			background = <5>;
+			top-app = <5>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 100 100>;
+		};
+
+		idle_weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 100 100>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-3";
+			top-app = "0-7";
+			rt = "0-7";
+		};
+
+		esg {
+			step = <4 4 4>;
+			patient-mode = <1 1 1>;
+			pelt-margin = <0 0 0>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <75>;
+				};
+				domain1 {
+					cpus = "4-7";
+					lower-boundary = <50>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <50 100 100>;
+		};
+
+		ecs {
+			stage0 {
+				cpus = "0-5";
+				monitor-cpus = "4-5";
+				busy-threshold = <544>;
+			};
+			stage1 {
+				cpus = "0-6";
+				monitor-cpus = "4-6";
+				busy-threshold = <778>;
+			};
+			stage2 {
+				cpus = "0-7";
+				monitor-cpus = "4-7";
+				busy-threshold = <1116>;
+			};
+		};
+	};
+
+	set3_1: set@0301 {
+		idx = <301>;
+		desc = "game touch boost";
+		ecs {
+		};
+	};
+
+	set3_2: set@0302 {
+		idx = <302>;
+		desc = "game extreme boost";
+
+		sched_policy {
+			root = <0>;
+			foreground = <2>;
+			background = <0>;
+			top-app = <2>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 100 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <200 200 200>;
+			background = <200 200 200>;
+			top-app = <200 200 200>;
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+			mask = "4-7";
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+	};
+
+	set4: set@0400 {
+		idx = <400>;
+		desc = "balance default";
+
+		sched_policy {
+			root = <1>;
+			foreground = <1>;
+			background = <1>;
+			top-app = <1>;
+		};
+
+		weight {
+			root = <200 100 25>;
+			foreground = <200 100 25>;
+			background = <200 100 25>;
+			top-app = <200 100 25>;
+		};
+
+		idle_weight {
+			root = <400 200 25>;
+			foreground = <400 200 25>;
+			background = <400 200 25>;
+			top-app = <400 200 25>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <4 6 8>;
+			patient-mode = <0 0 0>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <660>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <550>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <75 100 100>;
+		};
+
+		ecs {
+
+			stage0 {
+				cpus = "0-5";
+				monitor-cpus = "4-5";
+				busy-threshold = <544>;
+			};
+
+			stage1 {
+				cpus = "0-6";
+				monitor-cpus = "4-6";
+				busy-threshold = <1046>;
+			};
+
+			stage2 {
+				cpus = "0-7";
+				monitor-cpus = "4-7";
+				busy-threshold = <1492>;
+			};
+		};
+	};
+
+	set4_1: set@0401 {
+		idx = <401>;
+		desc = "balance touch boost";
+
+		sched_policy {
+			root = <0>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <200 100 25>;
+			foreground = <130 130 100>;
+			background = <200 100 25>;
+			top-app = <130 130 100>;
+		};
+
+		idle_weight {
+			root = <400 200 50>;
+			foreground = <250 1300 1000>;
+			background = <400 200 50>;
+			top-app = <250 1300 1000>;
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+	};
+
+	set4_2: set@0402 {
+		idx = <402>;
+		desc = "balance extreme boost";
+
+		sched_policy {
+			root = <0>;
+			foreground = <2>;
+			background = <0>;
+			top-app = <2>;
+		};
+
+		weight {
+			root = <130 130 100>;
+			foreground = <130 130 100>;
+			background = <100 100 100>;
+			top-app = <100 130 100>;
+		};
+
+		idle_weight {
+			root = <260 260 200>;
+			foreground = <260 260 200>;
+			background = <200 200 200>;
+			top-app = <200 260 200>;
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+			mask = "4-7";
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+	};
+
+	set5: set@0500 {
+		idx = <500>;
+		desc = "camera default";
+
+		sched_policy {
+			root = <0>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 150 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <200 200 200>;
+			background = <200 200 200>;
+			top-app = <200 300 200>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <5 5 5>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <4 6 8>;
+			patient-mode = <0 0 0>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <600>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <500>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 100 100>;
+		};
+
+		ecs {
+			stage0 {
+				cpus = "0-5";
+				monitor-cpus = "4-5";
+				busy-threshold = <544>;
+			};
+			stage1 {
+				cpus = "0-6";
+				monitor-cpus = "4-6";
+				busy-threshold = <778>;
+			};
+			stage2 {
+				cpus = "0-7";
+				monitor-cpus = "4-7";
+				busy-threshold = <1116>;
+			};
+		};
+	};
+
+	set5_1: set@0501 {
+		idx = <501>;
+		desc = "camera touch boost";
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 100 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <250 1000 1000>;
+			background = <200 200 200>;
+			top-app = <250 1000 1000>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <20 20 20>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <600>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <500>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+	};
+
+	set5_2: set@0502 {
+		idx = <502>;
+		desc = "camera extreme boost";
+
+		sched_policy {
+			root = <0>;
+			foreground = <2>;
+			background = <0>;
+			top-app = <2>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 100 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <200 200 200>;
+			background = <200 200 200>;
+			top-app = <200 200 200>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <600>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <500>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+			mask = "4-7";
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+	};
+
+	set6: set@0600 {
+		idx = <600>;
+		desc = "camera sub mode 1 default";
+
+		sched_policy {
+			root = <0>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 150 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <200 200 200>;
+			background = <200 200 200>;
+			top-app = <200 300 200>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 5 5>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <12 6 8>;
+			patient-mode = <1 0 0>;
+			pelt-margin = <15 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <8>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <600>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <500>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 100 100>;
+		};
+
+		ecs {
+			stage0 {
+				cpus = "0-5";
+				monitor-cpus = "4-5";
+				busy-threshold = <544>;
+			};
+			stage1 {
+				cpus = "0-6";
+				monitor-cpus = "4-6";
+				busy-threshold = <778>;
+			};
+			stage2 {
+				cpus = "0-7";
+				monitor-cpus = "4-7";
+				busy-threshold = <1116>;
+			};
+		};
+	};
+
+	set7: set@0700 {
+		idx = <700>;
+		desc = "camera sub mode 2 default";
+
+		sched_policy {
+			root = <0>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 150 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <200 200 200>;
+			background = <200 200 200>;
+			top-app = <200 300 200>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <12 8 10>;
+			patient-mode = <1 1 1>;
+			pelt-margin = <15 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <600>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <500>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 100 100>;
+		};
+
+		ecs {
+			stage0 {
+				cpus = "0-5";
+				monitor-cpus = "4-5";
+				busy-threshold = <544>;
+			};
+			stage1 {
+				cpus = "0-6";
+				monitor-cpus = "4-6";
+				busy-threshold = <778>;
+			};
+			stage2 {
+				cpus = "0-7";
+				monitor-cpus = "4-7";
+				busy-threshold = <1116>;
+			};
+		};
+	};
+
+	set8: set@0800 {
+		idx = <800>;
+		desc = "camera sub mode 3 default";
+
+		sched_policy {
+			root = <1>;
+			foreground = <1>;
+			background = <1>;
+			top-app = <1>;
+		};
+
+		weight {
+			root = <200 100 25>;
+			foreground = <200 100 25>;
+			background = <200 100 25>;
+			top-app = <200 100 25>;
+		};
+
+		idle_weight {
+			root = <400 200 25>;
+			foreground = <400 200 25>;
+			background = <400 200 25>;
+			top-app = <400 200 25>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <4 6 8>;
+			patient-mode = <0 0 0>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-7";
+					lower-boundary = <60>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <75 100 100>;
+		};
+	};
+
+	set9: set@0900 {
+		idx = <900>;
+		desc = "camera sub mode 4 default";
+
+		sched_policy {
+			root = <0>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 150 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <200 200 200>;
+			background = <200 200 200>;
+			top-app = <200 300 200>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <12 8 10>;
+			patient-mode = <1 1 1>;
+			pelt-margin = <15 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <600>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <500>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 100 100>;
+		};
+
+		ecs {
+			stage0 {
+				cpus = "0-5";
+				monitor-cpus = "4-5";
+				busy-threshold = <544>;
+			};
+			stage1 {
+				cpus = "0-6";
+				monitor-cpus = "4-6";
+				busy-threshold = <778>;
+			};
+			stage2 {
+				cpus = "0-7";
+				monitor-cpus = "4-7";
+				busy-threshold = <1116>;
+			};
+		};
+	};
+
+	set10: set@1000 {
+		idx = <1000>;
+		desc = "gameSDK sub mode 0 default";
+
+		sched_policy {
+			root = <0>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <100 100 100>;
+			background = <100 100 100>;
+			top-app = <100 150 100>;
+		};
+
+		idle_weight {
+			root = <200 200 200>;
+			foreground = <200 200 200>;
+			background = <100 100 100>;
+			top-app = <200 300 200>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <5 5 5>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <4 6 8>;
+			patient-mode = <0 0 0>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <600>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <500>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 100 100>;
+		};
+
+		ecs {
+			stage0 {
+				cpus = "0-5";
+				monitor-cpus = "4-5";
+				busy-threshold = <544>;
+			};
+			stage1 {
+				cpus = "0-6";
+				monitor-cpus = "4-6";
+				busy-threshold = <778>;
+			};
+			stage2 {
+				cpus = "0-7";
+				monitor-cpus = "4-7";
+				busy-threshold = <1116>;
+			};
+		};
+	};
+
+	set10_1: set@1001 {
+		idx = <1001>;
+		desc = "gameSDK touch boost";
+
+		sched_policy {
+			root = <1>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <100 100 100>;
+			foreground = <65 350 350>;
+			background = <100 100 100>;
+			top-app = <65 350 350>;
+		};
+
+		idle_weight {
+			root = <100 100 100>;
+			foreground = <130 1000 1000>;
+			background = <100 100 100>;
+			top-app = <130 1000 1000>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <5 5 5>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <600>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <500>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+	};
+
+	set10_2: set@1002 {
+		idx = <1002>;
+		desc = "gameSDK extreme boost";
+
+		sched_policy {
+			root = <0>;
+			foreground = <2>;
+			background = <0>;
+			top-app = <2>;
+		};
+
+		weight {
+			root = <65 100 100>;
+			foreground = <65 100 100>;
+			background = <65 100 100>;
+			top-app = <65 100 100>;
+		};
+
+		idle_weight {
+			root = <130 200 200>;
+			foreground = <130 200 200>;
+			background = <130 200 200>;
+			top-app = <130 200 200>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <600>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <500>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+			mask = "4-7";
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+	};
+
+	set11: set@1100 {
+		idx = <1100>;
+		desc = "gameSDK sub mode 1 default";
+
+		sched_policy {
+			root = <1>;
+			foreground = <1>;
+			background = <1>;
+			top-app = <1>;
+		};
+
+		weight {
+			root = <200 100 25>;
+			foreground = <200 100 25>;
+			background = <200 100 25>;
+			top-app = <200 100 25>;
+		};
+
+		idle_weight {
+			root = <400 200 25>;
+			foreground = <400 200 25>;
+			background = <400 200 25>;
+			top-app = <400 200 25>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <4 6 8>;
+			patient-mode = <0 0 0>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-7";
+					lower-boundary = <60>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <75 100 100>;
+		};
+	};
+
+	set12: set@1200 {
+		idx = <1200>;
+		desc = "gameSDK sub mode 2 default";
+
+		sched_policy {
+			root = <1>;
+			foreground = <1>;
+			background = <1>;
+			top-app = <1>;
+		};
+
+		weight {
+			root = <1280 200 25>;
+			foreground = <1280 200 25>;
+			background = <1280 200 25>;
+			top-app = <1280 200 25>;
+		};
+
+		idle_weight {
+			root = <2560 400 50>;
+			foreground = <2560 400 50>;
+			background = <2560 400 50>;
+			top-app = <2560 400 50>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <10 8 10>;
+			patient-mode = <1 1 1>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <105>;
+				};
+				domain1 {
+					cpus = "4-7";
+					lower-boundary = <106>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <90 100 100>;
+		};
+	};
+
+	set13: set@1300 {
+		idx = <1300>;
+		desc = "gameSDK sub mode 3 default";
+
+		sched_policy {
+			root = <1>;
+			foreground = <1>;
+			background = <1>;
+			top-app = <1>;
+		};
+
+		weight {
+			root = <200 100 25>;
+			foreground = <200 100 25>;
+			background = <200 100 25>;
+			top-app = <200 100 25>;
+		};
+
+		idle_weight {
+			root = <400 200 25>;
+			foreground = <400 200 25>;
+			background = <400 200 25>;
+			top-app = <400 200 25>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <4 6 8>;
+			patient-mode = <0 0 0>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-7";
+					lower-boundary = <60>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <75 100 100>;
+		};
+	};
+
+	set14: set@1400 {
+		idx = <1400>;
+		desc = "gameSDK sub mode 4 default";
+
+		sched_policy {
+			root = <1>;
+			foreground = <1>;
+			background = <1>;
+			top-app = <1>;
+		};
+
+		weight {
+			root = <1280 200 25>;
+			foreground = <1280 200 25>;
+			background = <1280 200 25>;
+			top-app = <1280 200 25>;
+		};
+
+		idle_weight {
+			root = <2560 400 50>;
+			foreground = <2560 400 50>;
+			background = <2560 400 50>;
+			top-app = <2560 400 50>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <0 0 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <10 8 10>;
+			patient-mode = <1 1 1>;
+			pelt-margin = <25 25 25>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <0>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <105>;
+				};
+				domain1 {
+					cpus = "4-7";
+					lower-boundary = <106>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <90 100 100>;
+		};
+	};
+
+	set15: set@1500 {
+		idx = <1500>;
+		desc = "browser default";
+
+		sched_policy {
+			root = <0>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <130 130 100>;
+			foreground = <130 130 100>;
+			background = <100 100 100>;
+			top-app = <100 200 100>;
+		};
+
+		idle_weight {
+			root = <260 260 200>;
+			foreground = <260 260 200>;
+			background = <100 100 100>;
+			top-app = <200 400 200>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <5 5 0>;
+		};
+
+		wakeup_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <40 10 0>;
+		};
+
+		cpus_allowed {
+			target-sched-class = <8>;
+			root = "0-7";
+			foreground = "0-7";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		esg {
+			step = <4 6 8>;
+			patient-mode = <0 0 0>;
+			pelt-margin = <25 25 0>;
+			pelt-boost = <0 0 0>;
+			up-rate-limit-ms = <4>;
+			down-rate-limit-ms = <4>;
+			rapid-scale-up = <1>;
+			rapid-scale-down = <0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <660>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <550>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <0>;
+			mask = [37 00];
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 100 100>;
+		};
+
+		ecs {
+			stage0 {
+				cpus = "0-5";
+				monitor-cpus = "4-5";
+				busy-threshold = <544>;
+			};
+			stage1 {
+				cpus = "0-6";
+				monitor-cpus = "4-6";
+				busy-threshold = <1046>;
+			};
+			stage2 {
+				cpus = "0-7";
+				monitor-cpus = "4-7";
+				busy-threshold = <1492>;
+			};
+		};
+	};
+
+	set15_1: set@1501 {
+		idx = <1501>;
+		desc = "browser touch boost";
+
+		sched_policy {
+			root = <1>;
+			foreground = <0>;
+			background = <1>;
+			top-app = <0>;
+		};
+
+		weight {
+			root = <130 130 100>;
+			foreground = <65 450 350>;
+			background = <100 100 100>;
+			top-app = <65 450 350>;
+		};
+
+		idle_weight {
+			root = <130 130 100>;
+			foreground = <130 1300 1000>;
+			background = <100 100 100>;
+			top-app = <130 1300 1000>;
+		};
+
+		freq_boost {
+			root = <0 0 0>;
+			foreground = <0 0 0>;
+			background = <0 0 0>;
+			top-app = <5 5 0>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <660>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <550>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+	};
+
+	set15_2: set@1502 {
+		idx = <1502>;
+		desc = "browser extreme boost";
+
+		sched_policy {
+			root = <0>;
+			foreground = <2>;
+			background = <0>;
+			top-app = <2>;
+		};
+
+		weight {
+			root = <65 130 100>;
+			foreground = <65 130 100>;
+			background = <65 100 100>;
+			top-app = <65 130 100>;
+		};
+
+		idle_weight {
+			root = <130 260 200>;
+			foreground = <130 260 200>;
+			background = <130 200 200>;
+			top-app = <130 260 200>;
+		};
+
+		ontime {
+			root = <0>;
+			foreground = <1>;
+			background = <0>;
+			top-app = <1>;
+
+			dom-list {
+				domain0 {
+					cpus = "0-3";
+					lower-boundary = <0>;
+					upper-boundary = <90>;
+				};
+				domain1 {
+					cpus = "4-6";
+					lower-boundary = <60>;
+					upper-boundary = <660>;
+				};
+				domain2 {
+					cpus = "7";
+					lower-boundary = <550>;
+					upper-boundary = <1024>;
+				};
+			};
+		};
+
+		cpus_allowed {
+			target-sched-class = <4>;
+			root = "0-7";
+			foreground = "4-6";
+			background = "0-7";
+			top-app = "0-7";
+		};
+
+		prio_pinning {
+			root = <0>;
+			foreground = <0>;
+			background = <0>;
+			top-app = <1>;
+			mask = "4-7";
+			prio = <110>;
+		};
+
+		frt {
+			active-ratio = <25 3 5>;
+		};
+
+		ecs {
+		};
+	};
+};

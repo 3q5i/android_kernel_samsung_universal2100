@@ -1,0 +1,235 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos2100 SoC PROFILER device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ */
+
+#include <dt-bindings/clock/exynos2100.h>
+#include <dt-bindings/soc/samsung/exynos-migov.h>
+
+/ {
+	exynos_cpu_profiler: exynos-cpu-profiler {
+		compatible = "samsung,exynos-cpu-profiler";
+		status = "okay";
+
+		cpu_domain0: domain@0 {
+			sibling-cpus = "0-3";
+			cal-id = <ACPM_DVFS_CPUCL0>;
+			migov-id = <MIGOV_CL0>;
+			power-coefficient = <217>;
+			static-power-coefficient = <6>;
+			event0 = <0x01 0xf8 0x1e830000 0x100000>;
+		};
+
+		cpu_domain1: domain@1 {
+			sibling-cpus = "4-6";
+			cal-id = <ACPM_DVFS_CPUCL1>;
+			migov-id = <MIGOV_CL1>;
+			power-coefficient = <540>;
+			static-power-coefficient = <150>;
+			tz-name = "MID";
+			event0 = <0x01 0xf8 0x1e830000 0x100000>;
+		};
+
+		cpu_domain2: domain@2 {
+			sibling-cpus = [37 00];
+			cal-id = <ACPM_DVFS_CPUCL2>;
+			migov-id = <MIGOV_CL2>;
+			power-coefficient = <859>;
+			static-power-coefficient = <599>;
+			tz-name = "BIG";
+			event0 = <0x01 0xf8 0x1e830000 0x100000>;
+		};
+	};
+
+	exynos_gpu_profiler: exynos-gpu-profiler {
+		compatible = "samsung,exynos-gpu-profiler";
+		status = "okay";
+		cal-id = <ACPM_DVFS_G3D>;
+		migov-id = <MIGOV_GPU>;
+		power-coefficient = <8220>;
+		static-power-coefficient = <0>;
+		tz-name = "G3D";
+	};
+
+	exynos_mif_profiler: exynos-mif-profiler {
+		compatible = "samsung,exynos-mif-profiler";
+		status = "okay";
+		cal-id = <ACPM_DVFS_MIF>;
+		migov-id = <MIGOV_MIF>;
+		devfreq-type = <DEVFREQ_MIF>;
+		power-coefficient = <95150000>;
+		static-power-coefficient = <535>;
+	};
+
+	exynos_migov: exynos-migov {
+		compatible = "samsung,exynos-migov";
+		status = "okay";
+		window-period = <100>;
+		window-number = <30>;
+		active-pct-thr = <50>;
+		valid-freq-delta-pct = <50>;
+		min-sensitivity = <10>;
+		cpu-bottleneck-thr = <270>;
+		gpu-bottleneck-thr = <800>;
+		gpu-ar-bottleneck-thr = <750>;
+		mif-bottleneck-thr = <4800>;
+		hp-minlock-fps-delta-pct-thr = <375>;
+		hp-minlock-power-upper-thr = <3000>;
+		hp-minlock-power-lower-thr = <2500>;
+		dyn-mo-control = <1>;
+		mo-id = <61 62 63 64>;
+		frame-src = <1>;
+		max-fps = <600>;
+		dt-ctrl-en = <1>;
+		dt-over-thr = <10>;
+		dt-under-thr = <100>;
+		dt-up-step = <10>;
+		dt-down-step = <10>;
+		dpat-upper-thr = <9000000>;
+		dpat-lower-thr = <0>;
+		dpat-lower-cnt-thr = <1>;
+		dpat-up-step = <10>;
+		dpat-down-step = <10>;
+		inc-perf-temp-thr = <65>;
+		inc-perf-power-thr = <0>;
+		inc-perf-thr = <0>;
+		dec-perf-thr = <(-1000)>;
+		fragutil-thr = <50>;
+		gpu-freq-thr = <403000>;
+		heavy-gpu-ms-thr = <50>;
+
+		cl0 {
+			max = <400>;
+			min = <100>;
+			up-step = <2>;
+			down-step = <5>;
+			default-step = <10>;
+			pm-qos-cpu = <0>;
+			pm-qos-min-freq = <1586000>;
+			pm-qos-max-freq = <2002000>;
+			hp-minlock-low-limit = <2002000>;
+			lp-minlock-low-limit = <858000>;
+		};
+
+		cl1 {
+			max = <400>;
+			min = <100>;
+			up-step = <2>;
+			down-step = <5>;
+			default-step = <10>;
+			pm-qos-cpu = <4>;
+			pm-qos-max-freq = <2600000>;
+			hp-minlock-low-limit = <1976000>;
+			lp-minlock-low-limit = <1170000>;
+		};
+
+		cl2 {
+			max = <400>;
+			min = <100>;
+			up-step = <2>;
+			down-step = <5>;
+			default-step = <10>;
+			pm-qos-cpu = <7>;
+			pm-qos-max-freq = <2600000>;
+			hp-minlock-low-limit = <1976000>;
+			lp-minlock-low-limit = <1170000>;
+		};
+
+		gpu {
+			max = <150>;
+			min = <1>;
+			up-step = <2>;
+			down-step = <5>;
+			default-step = <2>;
+			pm-qos-max-class = <27>;
+			pm-qos-min-class = <26>;
+			q0-empty-pct-thr = <0>;
+			q1-empty-pct-thr = <0>;
+			active-pct-thr = <100>;
+		};
+
+		mif {
+			max = <200>;
+			min = <0>;
+			up-step = <2>;
+			down-step = <5>;
+			default-step = <10>;
+			pm-qos-min-class = <14>;
+			pm-qos-max-class = <15>;
+			freq-stats0-mode-min-freq = <1716000>;
+			pm-qos-max-freq = <3172000>;
+			pm-qos-min-freq = <845000>;
+			freq-stats0-thr = <4500>;
+			freq-stats0-updown-delta-pct-thr = <200>;
+			hp-minlock-low-limit = <2730000>;
+		};
+	};
+
+	exynos_idle_profiler: exynos-idle-profiler {
+		compatible = "samsung,exynos-idle-profiler";
+		work_interval = <100>;
+
+		idle_profiler_cpu {
+			type = <0>;
+			domain_name = "CPU";
+			enable = <0x10030490>;
+			clear = <0x10030498>;
+
+			idle_profiler0: CPU0 {
+				id = <0x00>;
+				perf_cnt = <0x10030400>;
+			};
+
+			idle_profiler1: CPU1 {
+				id = <0x01>;
+				perf_cnt = <0x10030410>;
+			};
+
+			idle_profiler2: CPU2 {
+				id = <0x02>;
+				perf_cnt = <0x10030420>;
+			};
+
+			idle_profiler3: CPU3 {
+				id = <0x03>;
+				perf_cnt = <0x10030430>;
+			};
+
+			idle_profiler4: CPU4 {
+				id = <0x04>;
+				perf_cnt = <0x10030440>;
+			};
+
+			idle_profiler5: CPU5 {
+				id = <0x05>;
+				perf_cnt = <0x10030450>;
+			};
+
+			idle_profiler6: CPU6 {
+				id = <0x06>;
+				perf_cnt = <0x10030460>;
+			};
+
+			idle_profiler7: CPU7 {
+				id = <0x07>;
+				perf_cnt = <0x10030470>;
+			};
+		};
+
+		idle_profiler_gpu {
+			type = <1>;
+			domain_name = "GPU";
+			enable = <0x10030494>;
+			clear = <0x1003049c>;
+
+			idle_profiler8: GPU {
+				id = <0x00>;
+				perf_cnt = <0x10030480>;
+			};
+		};
+	};
+};

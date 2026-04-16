@@ -1,0 +1,89 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos2100 SoC USB device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ */
+
+#include <dt-bindings/interrupt-controller/exynos2100.h>
+
+/ {
+	exynos_usb_audio_offloading: exynos-usb-audio-offloading {
+		compatible = "exynos-usb-audio-offloading";
+	};
+
+	udc: usb@10E00000 {
+		compatible = "samsung,exynos-dwusb";
+		clocks = <&clock GATE_USB31DRD_QCH_SLV_LINK>,
+				<&clock UMUX_CLKCMU_HSI0_USB31DRD>,
+				<&clock DOUT_CLK_TOP_HSI0_BUS>;
+		clock-names = "aclk", "sclk", "bus";
+		reg = <0x00 0x10e00000 0x10000>;
+		#address-cells = <2>;
+		#size-cells = <1>;
+		ranges;
+		status = "disabled";
+		power-domains = <&pd_hsi0>;
+		samsung,sysreg-hsi0 = <&sysreg_hsi0>;
+		interrupts = <GIC_SPI INTREQ__USB31DRD_GIC_0 IRQ_TYPE_LEVEL_HIGH>;
+		tx-fifo-resize = <0>;
+		adj-sof-accuracy = <1>;
+		usb_host_device_timeout = <200>;
+		is_not_vbus_pad = <1>;
+		enable_sprs_transfer = <1>;
+		phys = <&usbdrd_phy0 0x00>, <&usbdrd_phy0 0x01>;
+		phy-names = "usb2-phy", "usb3-phy";
+		xhci_l2_support = <1>;
+		dr_mode = "otg";
+		usb_audio_offloading = <1>;
+		ldos = <3>;
+		ldo_number = <10 11 12>;
+	};
+
+	usbdrd_phy0: phy@10C00000 {
+		compatible = "samsung,exynos-usbdrd-phy";
+		reg = <
+				0x00 0x10c00000 0x200
+				0x00 0x10ae0000 0x2800
+				0x00 0x10af0000 0x800
+				0x00 0x10e00000 0x10000>;
+		interrupts =
+				<GIC_SPI INTREQ__USB2_REMOTE_WAKEUP_GIC IRQ_TYPE_LEVEL_HIGH>,
+				<GIC_SPI INTREQ__USB2_REMOTE_CONNECT_GIC IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&clock OSCCLK>, <&clock GATE_USB31DRD_QCH_SLV_LINK>;
+		clock-names = "ext_xtal", "aclk";
+		samsung,pmu-syscon = <&pmu_system_controller>;
+		power-domains = <&pd_hsi0>;
+		pmu_mask = <0x00>;
+		pmu_offset = <0x72c>;
+		pmu_offset_dp = <0x730>;
+		phy_version = <0x301>;
+		phyclk_mux = "none";
+		phy_refclk = "ext_xtal";
+		has_other_phy = <0>;
+		has_combo_phy = <1>;
+		sub_phy_version = <0x400>;
+		ip_type = <0x00>;
+		phy_refsel_clockcore = <1>;
+		phy_refsel_ext_osc = <0>;
+		phy_refsel_xtal = <0>;
+		phy_refsel_diff_pad = <0>;
+		phy_refsel_diff_internal = <0>;
+		phy_refsel_diff_single = <0>;
+		use_io_for_ovc = <0>;
+		common_block_disable = <1>;
+		is_not_vbus_pad = <1>;
+		used_phy_port = <0>;
+		status = "disabled";
+		#phy-cells = <1>;
+		ranges;
+	};
+
+	usb_notifier: usb_notifier {
+		compatible = "samsung,usb-notifier";
+		udc = <&udc>;
+		status = "disabled";
+	};
+};

@@ -1,0 +1,5459 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos2100 SoC BTS device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+*/
+
+#include <dt-bindings/soc/samsung/exynos-bts.h>
+
+/ {
+	exynos_bts: exynos-bts {
+		compatible = "samsung,exynos-bts";
+		#address-cells = <2>;
+		#size-cells = <1>;
+		ranges;
+		list-scen = "default", "cp_throughput",
+				"mfc_uhd", "mfc_uhd_10bit",
+				"mfc_8k_dec30", "g3d_heavy",
+				"g3d_gamesdk", "g3d_performance",
+				"dp_default", "camera_default",
+				"npu_normal", "mfc_uhd_enc60",
+				"camera_heavy", "npu_performance";
+
+		bts_irp0 {
+			#address-cells = <2>;
+			#size-cells = <1>;
+			ranges;
+			reg = <0x00 0x1a8a4000 0x400>;
+			status = "okay";
+			bts-type = <TREX_BTS>;
+		};
+
+		bts_irp1 {
+			reg = <0x00 0x1a8b4000 0x400>;
+			status = "okay";
+			bts-type = <TREX_BTS>;
+		};
+
+		bts_irp2 {
+			reg = <0x00 0x1a8c4000 0x400>;
+			status = "okay";
+			bts-type = <TREX_BTS>;
+		};
+
+		bts_irp3 {
+			reg = <0x00 0x1a8d4000 0x400>;
+			status = "okay";
+			bts-type = <TREX_BTS>;
+		};
+
+		bts_smc0 {
+			reg = <0x00 0x1c03f258 0x04>;
+			status = "okay";
+			bts-type = <SMC_BTS>;
+		};
+
+		bts_smc1 {
+			reg = <0x00 0x1c13f258 0x04>;
+			status = "okay";
+			bts-type = <SMC_BTS>;
+		};
+
+		bts_smc2 {
+			reg = <0x00 0x1c23f258 0x04>;
+			status = "okay";
+			bts-type = <SMC_BTS>;
+		};
+
+		bts_smc3 {
+			reg = <0x00 0x1c33f258 0x04>;
+			status = "okay";
+			bts-type = <SMC_BTS>;
+		};
+
+		bts_bus2_0 {
+			reg = <0x00 0x1b782000 0x100>;
+			status = "okay";
+			bts-type = <BUSC_BTS>;
+		};
+
+		bts_bus2_1 {
+			reg = <0x00 0x1b792000 0x100>;
+			status = "okay";
+			bts-type = <BUSC_BTS>;
+		};
+
+		bts_bus2_2 {
+			reg = <0x00 0x1b7a2000 0x100>;
+			status = "okay";
+			bts-type = <BUSC_BTS>;
+		};
+
+		bts_bus2_3 {
+			reg = <0x00 0x1b7b2000 0x100>;
+			status = "okay";
+			bts-type = <BUSC_BTS>;
+		};
+
+		bts_bus1_0 {
+			reg = <0x00 0x1b482000 0x100>;
+			status = "okay";
+			bts-type = <BUSC_BTS>;
+		};
+
+		bts_bus1_1 {
+			reg = <0x00 0x1b492000 0x100>;
+			status = "okay";
+			bts-type = <BUSC_BTS>;
+		};
+
+		bts_bus0_0 {
+			reg = <0x00 0x1b0e2000 0x100>;
+			status = "okay";
+			bts-type = <BUSC_BTS>;
+		};
+
+		bts_bus0_1 {
+			reg = <0x00 0x1b0f2000 0x100>;
+			status = "okay";
+			bts-type = <BUSC_BTS>;
+		};
+
+		bts_bus0_2 {
+			reg = <0x00 0x1b102000 0x100>;
+			status = "okay";
+			bts-type = <BUSC_BTS>;
+		};
+
+		bts_bus0_3 {
+			reg = <0x00 0x1b112000 0x100>;
+			status = "okay";
+			bts-type = <BUSC_BTS>;
+		};
+
+		bts_csis0 {
+			reg = <0x00 0x1b600000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x0c>;
+				awqos = <0x0c>;
+				rmo = <0xffff>;
+				wmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				qurgent_th_w = <0x0d>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_csis1 {
+			reg = <0x00 0x1b610000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x0c>;
+				awqos = <0x0c>;
+				rmo = <0xffff>;
+				wmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				qurgent_th_w = <0x0d>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_csis2 {
+			reg = <0x00 0x1b620000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x0c>;
+				awqos = <0x0c>;
+				rmo = <0xffff>;
+				wmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				qurgent_th_w = <0x0d>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_csis3 {
+			reg = <0x00 0x1b630000 0x5000>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x0c>;
+				awqos = <0x0c>;
+				rmo = <0xffff>;
+				wmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				qurgent_th_w = <0x0d>;
+				blocking_on = <0>;
+				vc-cfg = <0x01>;
+			};
+		};
+
+		bts_taa {
+			reg = <0x00 0x1b640000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x0c>;
+				awqos = <0x0c>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				qurgent_th_w = <0x0d>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mcfp00 {
+			reg = <0x00 0x1b650000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x0a>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mcfp01 {
+			reg = <0x00 0x1b660000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x0a>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mcfp02 {
+			reg = <0x00 0x1b670000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x0a>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mcfp03 {
+			reg = <0x00 0x1b680000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x0a>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mcfp10 {
+			reg = <0x00 0x1b690000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0a>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_dns0 {
+			reg = <0x00 0x1b6a0000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0a>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_dns1 {
+			reg = <0x00 0x1b6b0000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x1c>;
+				wmo = <0x0a>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mcsc0 {
+			reg = <0x00 0x1b6c0000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mcsc1 {
+			reg = <0x00 0x1b6d0000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mcsc2 {
+			reg = <0x00 0x1b6e0000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x30>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_yuvpp {
+			reg = <0x00 0x1b6f0000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0e>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x32>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_lme {
+			reg = <0x00 0x1b700000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x06>;
+				wmo = <0x06>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x14>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mfc00 {
+			reg = <0x00 0x1b710000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x14>;
+				wmo = <0x14>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x40>;
+				wmo = <0x40>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x14>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x12>;
+				wmo = <0x12>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mfc01 {
+			reg = <0x00 0x1b720000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x14>;
+				wmo = <0x14>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x40>;
+				wmo = <0x40>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x12>;
+				wmo = <0x12>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mfc10 {
+			reg = <0x00 0x1b730000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x14>;
+				wmo = <0x14>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x40>;
+				wmo = <0x40>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x14>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x12>;
+				wmo = <0x12>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mfc11 {
+			reg = <0x00 0x1b740000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x14>;
+				wmo = <0x14>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x40>;
+				wmo = <0x40>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x12>;
+				wmo = <0x12>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_hsi1 {
+			reg = <0x00 0x1b750000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0c>;
+				wmo = <0x0c>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+		};
+
+		bts_m2m {
+			reg = <0x00 0x1b760000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x08>;
+				qmax0_limit_w = <0x08>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x08>;
+				qmax0_limit_w = <0x08>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x08>;
+				qmax0_limit_w = <0x08>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x08>;
+				qmax0_limit_w = <0x08>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x08>;
+				qmax0_limit_w = <0x08>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x08>;
+				qmax0_limit_w = <0x08>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x08>;
+				qmax0_limit_w = <0x08>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x08>;
+				qmax0_limit_w = <0x08>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x08>;
+				qmax0_limit_w = <0x08>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x08>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_ssp {
+			reg = <0x00 0x1b770000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+		};
+
+		bts_dpu00 {
+			reg = <0x00 0x1b400000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x0c>;
+				qurgent_th_w = <0x06>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_dpu01 {
+			reg = <0x00 0x1b410000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x20>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x0c>;
+				qurgent_th_w = <0x06>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				wmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_dpu10 {
+			reg = <0x00 0x1b420000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x0c>;
+				qurgent_th_w = <0x06>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_dpu11 {
+			reg = <0x00 0x1b430000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x0c>;
+				qurgent_th_w = <0x06>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x08>;
+				awqos = <0x08>;
+				rmo = <0x40>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_hsi0 {
+			reg = <0x00 0x1b440000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+		};
+
+		bts_dit {
+			reg = <0x00 0x1b450000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0f>;
+				wmo = <0x0f>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+		};
+
+		bts_sbic {
+			reg = <0x00 0x1b460000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <1>;
+				qmax0_limit_r = <0x01>;
+				qmax0_limit_w = <0x01>;
+			};
+		};
+
+		bts_vpc0 {
+			reg = <0x00 0x1b000000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0xffff>;
+				wmo = <0xffff>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_vpc1 {
+			reg = <0x00 0x1b010000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0xffff>;
+				wmo = <0xffff>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_vpc2 {
+			reg = <0x00 0x1b020000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0xffff>;
+				wmo = <0xffff>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_npus0 {
+			reg = <0x00 0x1b030000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x36>;
+				wmo = <0x36>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x48>;
+				wmo = <0x48>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_npus1 {
+			reg = <0x00 0x1b040000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x36>;
+				wmo = <0x36>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x48>;
+				wmo = <0x48>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_npus2 {
+			reg = <0x00 0x1b050000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x36>;
+				wmo = <0x36>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x0b>;
+				wmo = <0x0b>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x60>;
+				wmo = <0x60>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_cp0 {
+			reg = <0x00 0x1a840000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x0d>;
+				awqos = <0x0d>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				qurgent_th_w = <0x14>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_cp1 {
+			reg = <0x00 0x1a850000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x0a>;
+				awqos = <0x0a>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_cp2 {
+			reg = <0x00 0x1a860000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x08>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_aud {
+			reg = <0x00 0x1a870000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x09>;
+				awqos = <0x09>;
+				qurgent_on = <12>;
+				qurgent_th_r = <0x14>;
+				qurgent_th_w = <0x14>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_coresight {
+			reg = <0x00 0x1a880000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_mmug3d {
+			reg = <0x00 0x1a890000 0x100>;
+			status = "okay";
+			bts-type = <IP_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x04>;
+				awqos = <0x04>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+				qurgent_on = <0>;
+				blocking_on = <0>;
+			};
+		};
+
+		bts_g3d0 {
+			reg = <0x00 0x1a000010 0x20 0x00 0x1a021220 0x10>;
+			status = "okay";
+			bts-type = <SCI_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+		};
+
+		bts_g3d1 {
+			reg = <0x00 0x1a000038 0x20 0x00 0x1a021230 0x10>;
+			status = "okay";
+			bts-type = <SCI_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+		};
+
+		bts_g3d2 {
+			reg = <0x00 0x1a000060 0x20 0x00 0x1a021240 0x10>;
+			status = "okay";
+			bts-type = <SCI_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+		};
+
+		bts_g3d3 {
+			reg = <0x00 0x1a000088 0x20 0x00 0x1a021250 0x10>;
+			status = "okay";
+			bts-type = <SCI_BTS>;
+
+			default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x10>;
+				wmo = <0x10>;
+			};
+
+			cp_throughput {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd_10bit {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_8k_dec30 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			g3d_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+
+			g3d_gamesdk {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x18>;
+				wmo = <0x18>;
+			};
+
+			g3d_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+
+			dp_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			camera_default {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			npu_normal {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			mfc_uhd_enc60 {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			camera_heavy {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x04>;
+				wmo = <0x04>;
+			};
+
+			npu_performance {
+				stat_on = <1>;
+				bypass = <0>;
+				arqos = <0x00>;
+				awqos = <0x00>;
+				rmo = <0x20>;
+				wmo = <0x20>;
+			};
+		};
+	};
+};

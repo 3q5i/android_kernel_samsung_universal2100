@@ -1,0 +1,344 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos2100 SoC device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ */
+
+#include <dt-bindings/interrupt-controller/exynos2100.h>
+#include <dt-bindings/clock/exynos2100.h>
+
+/ {
+	dsp: dsp@15000000 {
+		compatible = "samsung,exynos-dsp";
+		dma-coherent;
+		reg = <0x00 0x15000000 0x300000>;
+		interrupts =
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_NS_0 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_NS_1 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_NS_2 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_NS_3 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_NS_4 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_NS_5 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_NS_6 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_NS_7 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_S_0 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_S_1 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_S_2 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_S_3 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_S_4 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_S_5 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_S_6 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__FROM_VPC_TO_HOST_S_7 IRQ_TYPE_LEVEL_HIGH>;
+		clocks =
+			<&clock UMUX_CLKCMU_VPC_BUS>,
+			<&clock GATE_ADM_DAP_VPC_QCH>,
+			<&clock GATE_IP_VPC_QCH>,
+			<&clock DOUT_DIV_CLK_VPC_BUSP>,
+			<&clock DOUT_DIV_CLK_VPC_BUS>,
+			<&clock UMUX_CLKCMU_VPD_BUS>,
+			<&clock GATE_IP_VPD_QCH>,
+			<&clock DOUT_DIV_CLK_VPD_BUSP>,
+			<&clock DOUT_DIV_CLK_VPD_BUS>;
+		clock-names =
+			"umux_clkcmu_vpc_bus",
+			"gate_adm_dap_vpc_qch",
+			"gate_ip_vpc_qch",
+			"dout_div_clk_vpc_busp",
+			"dout_div_clk_vpc_bus",
+			"umux_clkcmu_vpd_bus",
+			"gate_ip_vpd_qch",
+			"dout_div_clk_vpd_busp",
+			"dout_div_clk_vpd_bus";
+		iommus = <&sysmmu_d0_vpc>, <&sysmmu_d1_vpc>, <&sysmmu_d2_vpc>;
+		samsung,iommu-group = <&iommu_group_vpc>;
+		power-domains = <&pd_vpd1>;
+		samsung,dsp_dev_id = <0x04>;
+		memory-region = <&dsp_shmem>, <&dsp_master_rmem>;
+		samsung,imgloader-s2mpu-support;
+		samsung,fw-id = <0>;
+	};
+
+	npu: npu_exynos {
+		compatible = "samsung,exynos-npu";
+		iommus = <&sysmmu_d0_npus>, <&sysmmu_d1_npus>, <&sysmmu_d2_npus>;
+		samsung,iommu-group = <&iommu_group_npu>;
+		#dma-address-cells = <1>;
+		#dma-size-cells = <1>;
+		dma-window = <0x60000000 0x90000000>;
+		memory-region = <&dsp_shmem>;
+		interrupts =
+			<GIC_SPI O_INTREQ_NS_NPUS_HOST_2 IRQ_TYPE_EDGE_RISING>,
+			<GIC_SPI O_INTREQ_NS_NPUS_HOST_3 IRQ_TYPE_EDGE_RISING>,
+			<GIC_SPI INTREQ__OCP_THROTT_INTR_NPUS IRQ_TYPE_LEVEL_HIGH>;
+		power-domains = <&pd_npu10>;
+		samsung,npusys-corenum = <3>;
+		samsung,npumem-address =
+			<0x00 0x17c00000 0x100000>,
+			<0x00 0x19000000 0x100000>,
+			<0x00 0x19100000 0x100000>,
+			<0x00 0x19200000 0x100000>,
+			<0x00 0x19300000 0x100000>,
+			<0x00 0x19800000 0x100000>,
+			<0x00 0x19900000 0x100000>,
+			<0x00 0x19a00000 0x100000>,
+			<0x00 0x19b00000 0x100000>,
+			<0x00 0x17f10000 0x10000>,
+			<0x00 0x1e00c000 0x1000>,
+			<0x00 0x1e00b000 0x1000>,
+			<0x50640000 0x10040000 0x1000>,
+			<0x00 0x106f0000 0x1000>,
+			<0x00 0x17fc0000 0x10000>,
+			<0x00 0x17fa0000 0x10000>,
+			<0x00 0x158637e0 0x10>,
+			<0x00 0x19400000 0x300000>,
+			<0x00 0x17dd0000 0x10000>,
+			<0x00 0x50200000 0x200000>,
+			<0x00 0x50400000 0x200000>,
+			<0x02 0x28000000 0x800000>;
+		samsung,npumem-names =
+			"sfrnpus", "SFR",
+			"sfrnpuc0", "SFR",
+			"sfrnpuc1", "SFR",
+			"sfrnpuc2","SFR",
+			"sfrnpuc3", "SFR",
+			"sfrnpu0", "SFR",
+			"sfrnpu1", "SFR",
+			"sfrnpu2", "SFR",
+			"sfrnpu3", "SFR",
+			"sfrsnpus", "SFR",
+			"sfrcoresight", "SFR",
+			"sfrstm", "SFR",
+			"sfrmctg", "SFR",
+			"sfrpwm", "SFR",
+			"sfrmbox0", "SFR",
+			"sfrmbox1", "SFR",
+			"sfrpmu", "SFR",
+			"idpsram", "SFR",
+			"htunpus", "SFR",
+			"fwunittest", "",
+			"fwlog", "",
+			"imbbuf", "";
+		samsung,npucmd-cpuon-sfr = "sfrnpus", "sfrnpu0", "sfrnpu1", "sfrnpu2", "sfrsnpus", "sfrsnpus", "sfrsnpus", "sfrpmu";
+		samsung,npucmd-cpuon-data =
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x03 0x704 0x00 0xffffffff 0x00>,
+			<0x03 0x708 0x50000000 0xffffffff 0x00>,
+			<0x03 0x700 0x01 0xffffffff 0x00>,
+			<0x01 0x00 0x01 0xffffffff 0x00>;
+		samsung,npucmd-cpuoff-sfr = "sfrnpus", "sfrnpu0", "sfrnpu1", "sfrnpu2", "sfrnpus", "sfrpmu";
+		samsung,npucmd-cpuoff-data =
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x01 0x20414 0x1800 0x1800 0x00>,
+			<0x01 0x00 0x00 0xffffffff 0x00>;
+		samsung,npucmd-hwacgen-sfr = "sfrnpus", "sfrnpu0", "sfrnpu1", "sfrnpu2";
+		samsung,npucmd-hwacgen-data =
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>,
+			<0x01 0x800 0xf1000000 0xf1000000 0x00>;
+		samsung,npucmd-hwacgdis-sfr = "sfrnpus", "sfrnpu0", "sfrnpu1", "sfrnpu2";
+		samsung,npucmd-hwacgdis-data =
+			<0x01 0x800 0x00 0xf1000000 0x00>,
+			<0x01 0x800 0x00 0xf1000000 0x00>,
+			<0x01 0x800 0x00 0xf1000000 0x00>,
+			<0x01 0x800 0x00 0xf1000000 0x00>;
+		samsung,npucmd-glafmen-sfr = "htunpus", "htunpus";
+		samsung,npucmd-glafmen-data =
+			<0x01 0x200 0x80000000 0x80000000 0x00>,
+			<0x01 0x00 0x01 0x01 0x00>;
+		samsung,npucmd-glafmdis-sfr = "htunpus", "htunpus";
+		samsung,npucmd-glafmdis-data =
+			<0x01 0x200 0x00 0x80000000 0x00>,
+			<0x01 0x00 0x00 0x01 0x00>;
+		samsung,npucmd-afmitren-sfr = "htunpus", "htunpus", "htunpus", "htunpus", "htunpus", "htunpus";
+		samsung,npucmd-afmitren-data =
+			<0x01 0x80 0x800000 0xfff00000 0x00>,
+			<0x01 0x80 0x00 0xfff0 0x00>,
+			<0x01 0x80 0x02 0x02 0x00>,
+			<0x01 0x80 0x01 0x01 0x00>,
+			<0x01 0x48 0x3f000000 0x3f000000 0x00>,
+			<0x01 0x6c 0x08 0xf8 0x00>;
+		samsung,npucmd-afmitrdis-sfr = "htunpus", "htunpus", "htunpus", "htunpus", "htunpus", "htunpus";
+		samsung,npucmd-afmitrdis-data =
+			<0x01 0x80 0x00 0xfff00000 0x00>,
+			<0x01 0x80 0x00 0xfff0 0x00>,
+			<0x01 0x80 0x00 0x02 0x00>,
+			<0x01 0x80 0x00 0x01 0x00>,
+			<0x01 0x48 0x00 0x3f000000 0x00>,
+			<0x01 0x6c 0x00 0xf8 0x00>;
+		samsung,npucmd-afmthren-sfr = "htunpus";
+		samsung,npucmd-afmthren-data = <0x01 0x200 0x20 0x20 0x00>;
+		samsung,npucmd-afmthrdis-sfr = "htunpus";
+		samsung,npucmd-afmthrdis-data = <0x01 0x200 0x00 0x20 0x00>;
+		samsung,npucmd-chkafmitr-sfr = "htunpus";
+		samsung,npucmd-chkafmitr-data = <0x00 0x6c 0x8000000 0x8000000 0x00>;
+		samsung,npucmd-clrafmitr-sfr = "htunpus";
+		samsung,npucmd-clrafmitr-data = <0x01 0x6c 0x8000000 0x8000000 0x00>;
+		samsung,npucmd-clrafmtdc-sfr = "htunpus";
+		samsung,npucmd-clrafmtdc-data = <0x01 0x80 0x00 0xfff0 0x00>;
+		samsung,npucmd-printafm-sfr = "htunpus", "htunpus", "htunpus", "htunpus";
+		samsung,npucmd-printafm-data =
+			<0x00 0x200 0x00 0xffffffff 0x00>,
+			<0x00 0x00 0x00 0xffffffff 0x00>,
+			<0x00 0x6c 0x00 0xffffffff 0x00>,
+			<0x00 0x80 0x00 0xffffffff 0x00>;
+		samsung,npucmd-cpupc-sfr = "sfrsnpus";
+		samsung,npucmd-cpupc-data = <0x02 0x50c 0x00 0xffffffff 0x00>;
+		samsung,npucmd-buspdiv1to1-sfr = "sfrnpu0", "sfrnpu1", "sfrnpu2";
+		samsung,npucmd-buspdiv1to1-data =
+			<0x01 0x1800 0x00 0x0f 0x00>,
+			<0x01 0x1800 0x00 0x0f 0x00>,
+			<0x01 0x1800 0x00 0x0f 0x00>;
+		samsung,npucmd-buspdiv1to4-sfr = "sfrnpu0", "sfrnpu1", "sfrnpu2";
+		samsung,npucmd-buspdiv1to4-data =
+			<0x01 0x1800 0x03 0x0f 0x00>,
+			<0x01 0x1800 0x03 0x0f 0x00>,
+			<0x01 0x1800 0x03 0x0f 0x00>;
+		samsung,npucmd-enablestm-sfr = "sfrsnpus", "sfrnpuc0", "sfrnpuc1", "sfrnpuc2", "sfrcoresight", "sfrcoresight";
+		samsung,npucmd-enablestm-data =
+			<0x03 0x508 0x01 0x01 0x00>,
+			<0x01 0x20514 0x01 0x01 0x00>,
+			<0x01 0x20514 0x01 0x01 0x00>,
+			<0x01 0x20514 0x01 0x01 0x00>,
+			<0x01 0x34 0x01 0x07 0x00>,
+			<0x01 0x2c 0x01 0x01 0x00>;
+		samsung,npucmd-disablestm-sfr = "sfrcoresight", "sfrnpuc0", "sfrnpuc1", "sfrnpuc2", "sfrsnpus";
+		samsung,npucmd-disablestm-data =
+			<0x01 0x34 0x00 0x07 0x00>,
+			<0x01 0x20514 0x00 0x01 0x00>,
+			<0x01 0x20514 0x00 0x01 0x00>,
+			<0x01 0x20514 0x00 0x01 0x00>,
+			<0x03 0x508 0x00 0x01 0x00>;
+		samsung,npucmd-allow64stm-sfr = "sfrstm", "sfrstm", "sfrstm", "sfrstm", "sfrstm", "sfrstm", "sfrstm";
+		samsung,npucmd-allow64stm-data =
+			<0x01 0xd64 0x00 0xffffffff 0x00>,
+			<0x01 0xd60 0x00 0x01 0x00>,
+			<0x01 0xd20 0xffffffff 0xffffffff 0x00>,
+			<0x01 0xd00 0xffffffff 0xffffffff 0x00>,
+			<0x01 0xd60 0x01 0x01 0x00>,
+			<0x01 0xd20 0xffffffff 0xffffffff 0x00>,
+			<0x01 0xd00 0xffffffff 0xffffffff 0x00>;
+		samsung,npucmd-syncevent-sfr = 
+			"sfrnpus", "sfrnpus",
+			"sfrnpus", "sfrnpus",
+			"sfrnpus", "sfrnpus",
+			"sfrnpus", "sfrnpus",
+			"sfrnpus", "sfrnpus",
+			"sfrnpus", "sfrnpus",
+			"sfrnpus", "sfrnpus";
+		samsung,npucmd-syncevent-data =
+			<0x01 0x80 0x8000 0xffff 0x01>,
+			<0x01 0x80 0x01 0xffff 0x01>,
+			<0x01 0x80 0x8000 0xffff 0x01>,
+			<0x01 0x80 0x02 0xffff 0x01>,
+			<0x01 0x80 0x8000 0xffff 0x01>,
+			<0x01 0x80 0x04 0xffff 0x01>,
+			<0x01 0x80 0x8000 0xffff 0x01>,
+			<0x01 0x80 0x08 0xffff 0x01>,
+			<0x01 0x80 0x200 0xffff 0x01>,
+			<0x01 0x80 0x100 0xffff 0x01>,
+			<0x01 0x80 0x10 0xffff 0x01>,
+			<0x01 0x80 0x01 0xffff 0x01>,
+			<0x01 0x80 0x8000 0xffff 0x01>,
+			<0x01 0x80 0x4000 0xffff 0x01>;
+		samsung,imgloader-s2mpu-support = "true";
+		samsung,npusched-tpf-others = <0x5dc>;
+		samsung,npusched-afmlimit = <0xc3500>;
+		samsung,npusched-min-active-cores = <0x01>;
+		samsung,npusched-dvfs =
+			<&devfreq_5	1066000	30	120	75	85	75	30	0	100	100	1196000	1352000	0	0	1352000	1352000>,
+			<&devfreq_1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0>,
+			<&devfreq_0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0>,
+			<&devfreq_7	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0>;
+		samsung,npusched-names = "NPU", "exynos-interactive", "INT", "", "MIF", "", "VPC", "";
+		samsung,npudvfs-normal-dvfs = "VPC", "NPU", "NPU", "VPC", "VPC", "INT", "MIF";
+		samsung,npudvfs-normal-clock =
+			<1 1066000>,
+			<0 0>,
+			<1 1196000>,
+			<0 0>,
+			<1 1196000>,
+			<0 0>,
+			<0 0>;
+		samsung,npudvfs-boost-dvfs = "VPC", "NPU", "NPU", "VPC", "VPC", "INT", "MIF";
+		samsung,npudvfs-boost-clock =
+			<1 1066000>,
+			<1 1352000>,
+			<0 1352000>,
+			<1 1066000>,
+			<0 1066000>,
+			<0 800000>,
+			<0 3172000>;
+		samsung,npudvfs-boostdlv3-dvfs = "VPC", "NPU", "NPU", "VPC", "VPC";
+		samsung,npudvfs-boostdlv3-clock =
+			<1 1066000>,
+			<1 1352000>,
+			<0 1352000>,
+			<1 1066000>,
+			<0 1066000>;
+		samsung,npuinter-isr-cpu-affinity = <5>;
+		samsung,npuproto-task-priority = <1>;
+		samsung,npuproto-task-cpu-affinity = <5>;
+		status = "ok";
+		vertex_name = "npu";
+		configs =
+			<16>,
+			<3>,
+			<32>,
+			<16>,
+			<10>,
+			<1024>,
+			<1024>,
+			<4194304>,
+			<0>,
+			<20>,
+			<4096>,
+			<32768>,
+			<0x80000>,
+			<300>,
+			<12000>,
+			<0x00>,
+			<0>,
+			<0x50e00000>,
+			<0x17eb0000>,
+			<0x17ec0000>,
+			<0x15010000>,
+			<0x10000>,
+			<0>,
+			<1>,
+			<2>,
+			<3>,
+			<0x80000000>,
+			<0x2000000>,
+			<1000000>;
+
+		samsung,npurmem-address {
+			fwmemory {
+				memory-region = <&npu_fw_rmem>;
+				iova = <0x50000000>;
+				size = <0x200000>;
+			};
+		};
+	};
+
+	npuc0: npu_core0 {
+		compatible = "samsung,exynos-npu-core";
+		samsung,npucore-id = <0>;
+		status = "ok";
+	};
+
+	npuc1: npu_core1 {
+		compatible = "samsung,exynos-npu-core";
+		samsung,npucore-id = <1>;
+		status = "ok";
+	};
+};

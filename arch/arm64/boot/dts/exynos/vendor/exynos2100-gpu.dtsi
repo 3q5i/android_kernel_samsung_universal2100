@@ -1,0 +1,105 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos2100 Mali GPU device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ */
+
+#include <dt-bindings/soc/samsung/exynos2100-devfreq.h>
+
+/ {
+	/* mali */
+	mali: mali@18500000 {
+		compatible = "arm,mali";
+		reg = <0x00 0x18500000 0x5000>;
+		sysreg_g3d = <0x18420000>;
+		interrupts =
+				<GIC_SPI INTREQ__G3D_IRQJOB IRQ_TYPE_LEVEL_HIGH>,
+				<GIC_SPI INTREQ__G3D_IRQMMU IRQ_TYPE_LEVEL_HIGH>,
+				<GIC_SPI INTREQ__G3D_IRQGPU IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "JOB", "MMU", "GPU";
+		g3d_cmu_cal_id = <ACPM_DVFS_G3D>;
+		system-coherency = <0>;
+		power-domains = <&pd_embedded_g3d>;
+		g3d_genpd_name = "pd-embedded_g3d";
+		#cooling-cells = <2>;
+		ect-coeff-index = <3>;
+		governor = "interactive";
+		interactive_info = <403000 94 0>;
+		gpu_dvfs_table_size = <9 9>;
+
+		/*  8 columns      freq  down   up  stay  mif   little  middle   big  */
+		gpu_dvfs_table = <
+			858000    78    100     5     3172000     858000   0   0   16
+			767000    78     93     5     2730000     858000   0   0   16
+			676000    78     95     3     2535000     858000   0   0   16
+			585000    78     95     1     2288000     858000   0   0   16
+			494000    78     95     1     2028000     858000   0   0   16
+			403000    78     95     1     2028000     858000   0   0    0
+			312000    78     90     1     1539000          0   0   0    0
+			221000    78     85     1     1014000          0   0   0    0
+			130000     0     85     1      676000          0   0   0    0 >;
+
+		/* gpu-cl-pmqos-table-size */
+		gpu_cl_pmqos_table_size = <9 5>;
+
+		gpu_cl_pmqos_table = <
+			858000    2028000    858000    0    0
+			767000    1716000    858000    0    0
+			676000    1539000    858000    0    0
+			585000    1352000    858000    0    0
+			494000    1352000    858000    0    0
+			403000    1014000    858000    0    0
+			312000    1014000         0    0    0
+			221000    676000          0    0    0
+			130000    546000          0    0    0 >;
+
+		gpu_pmqos_cpu_cluster_num = <3>;
+		gpu_pmu_status_reg_offset = <0x2304>;
+		gpu_pmu_status_local_pwr_mask = <0x01>;
+		gpu_max_clock = <858000>;
+		gpu_max_clock_limit = <858000>;
+		gpu_min_clock = <130000>;
+		gpu_dvfs_start_clock = <221000>;
+		gpu_dvfs_bl_config_clock = <221000>;
+		gpu_default_voltage = <850000>;
+		gpu_cold_minimum_vol = <0>;
+		gpu_voltage_offset_margin = <0x927c>;
+		gpu_tmu_control = <1>;
+		gpu_temp_throttling_level_num = <6>;
+		gpu_temp_throttling = <858000 767000 676000 585000 494000 403000>;
+		gpu_power_coeff = <625>;
+		gpu_dvfs_time_interval = <5>;
+		gpu_default_wakeup_lock = <1>;
+		gpu_dynamic_abb = <0>;
+		gpu_early_clk_gating = <0>;
+		gpu_dvs = <0>;
+		gpu_inter_frame_pm = <1>;
+		gpu_inter_frame_dynamic_util = <50>;
+		gpu_inter_frame_dynamic_freq = <767000>;
+		gpu_perf_gathering = <0>;
+		gpu_runtime_pm_delay_time = <50>;
+		gpu_dvfs_polling_time = <30>;
+		gpu_weight_table_idx_0 = <5>;
+		gpu_weight_table_idx_1 = <5>;
+		gpu_interactive_fix = <0x00>;
+		gpu_pmqos_int_disable = <1>;
+		gpu_pmqos_mif_max_clock = <3172000>;
+		gpu_pmqos_mif_max_clock_base = <650000>;
+		gpu_cl_dvfs_start_base = <221000>;
+		gpu_debug_level = <3>;
+		gpu_trace_level = <8>;
+		gpu_mo_min_clock = <403000>;
+		gpu_boost_gpu_min_lock = <0>;
+		gpu_boost_egl_min_lock = <0>;
+		gpu_vk_boost_max_lock = <312000>;
+		gpu_vk_boost_mif_min_lock = <1014000>;
+		gpu_neg_boost_clock = <312000>;
+		gpu_sustainable_clock = <494000>;
+		gpu_bts_support = <1>;
+		gpu_heavy_compute_cpu0_min_clock = <2210000>;
+		gpu_heavy_compute_vk_cpu0_min_clock = <2002000>;
+	};
+};

@@ -1,0 +1,42 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Samsung's SoC MMC device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ */
+
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/interrupt-controller/exynos2100.h>
+
+/ {
+	aliases {
+		mshc2 = &dwmmc_2;
+	};
+
+	sysreg_hsi1_mmc: sysreg_hsi1_mmc@11020000 {
+		compatible = "samsung,exynos991-sysreg-hsi1-mmc", "syscon";
+		reg = <0x00 0x11020000 0x1000>;
+	};
+
+	dwmmc_2: dwmmc2@132E0000 {
+		compatible = "samsung,exynos-dw-mshc";
+		reg = <0x00 0x132e0000 0x2000>;
+		reg-names = "dw_mmc";
+		samsung,sysreg-phandle = <&sysreg_hsi1_mmc>;
+		interrupts = <GIC_SPI INTREQ__MMC_CARD IRQ_TYPE_LEVEL_HIGH>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		clocks = <&clock DOUT_CLKCMU_HSI1_MMC_CARD>, <&clock GATE_MMC_CARD_QCH>;
+		clock-names = "ciu", "ciu_gate";
+
+		mmc-io-coherency {
+			#address-cells = <2>;
+			#size-cells = <1>;
+			offset = <0x700>;
+			mask = <0x30000>;
+			bits = <0x30000>;
+		};
+	};
+};

@@ -1,0 +1,107 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * PCIe device tree source code for Exynos2100 SoC
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *              http://www.samsung.com
+ */
+
+#include <dt-bindings/pci/pci.h>
+#include <dt-bindings/clock/exynos2100.h>
+
+/ {
+	pcie_0: pcie@113B0000 {
+		compatible = "samsung,exynos-pcie";
+		gpios = <&gpf0 0x01 0x01>;
+		reg = <
+				0x00 0x113b0000 0x1000
+				0x00 0x113e0000 0x1000
+				0x00 0x11021044 0x10
+				0x00 0x113f0000 0x1000
+				0x00 0x113d0000 0x1fc
+				0x00 0x20ffe000 0x2000
+				0x00 0x11390000 0x1000>;
+		reg-names = "elbi", "phy", "sysreg", "dbi", "pcs", "config", "ia";
+		interrupts = <GIC_SPI INTREQ__PCIE_GEN2 IRQ_TYPE_LEVEL_HIGH>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0 0 0 0>;
+		interrupt-map = <0 0 0 0 &gic GIC_SPI INTREQ__PCIE_GEN2 IRQ_TYPE_LEVEL_HIGH>;
+		samsung,syscon-phandle = <&pmu_system_controller>;
+		clocks =
+				<&clock GATE_PCIE_GEN2_QCH_MSTR>,
+				<&clock GATE_PCIE_GEN2_QCH_PCS>,
+				<&clock GATE_PCIE_GEN2_QCH_PHY>,
+				<&clock GATE_PCIE_GEN2_QCH_DBI>,
+				<&clock GATE_PCIE_GEN2_QCH_APB>,
+				<&clock GATE_PCIE_GEN2_QCH_REF>;
+		clock-names = "bus", "pcie";
+		pinctrl-names = "active";
+		pinctrl-0 = <&pcie0_clkreq>, <&pcie0_perst>;
+		#address-cells = <3>;
+		#size-cells = <2>;
+		device_type = "pci";
+		ranges = <0x82000000 0x00 0x20000000 0x00 0x20000000 0x00 0xff0000>;
+		ip-ver = <0x984000>;
+		ep-ver = <0x4375>;
+		num-lanes = <1>;
+		ch-num = <0>;
+		pcie-clk-num = <0>;
+		phy-clk-num = <0>;
+		pcie-pm-qos-int = <267000>;
+		use-cache-coherency = "false";
+		use-msi = "false";
+		use-sicd = "true";
+		use-sysmmu = "false";
+		use-ia = "true";
+		pmu-offset = <0x71c>;
+		use-nclkoff-en = "false";
+		max-link-speed = <true>;
+		status = "disabled";
+	};
+
+	pcie_1: pcie@11320000 {
+		compatible = "samsung,exynos-pcie-rc";
+		gpios = <&gpf0 0x03 0x01>;
+		reg = <
+				0x00 0x11320000 0x2000
+				0x00 0x11350000 0x2000
+				0x00 0x11021054 0x10
+				0x00 0x11400000 0x301000
+				0x00 0x11340000 0x1000
+				0x00 0x40ffe000 0x2000
+				0x00 0x11300000 0x1000>;
+		reg-names = "elbi", "phy", "sysreg", "dbi", "pcs", "config", "ia";
+		interrupts = <GIC_SPI INTREQ__PCIE_GEN4_0 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "msi";
+		#interrupt-cells = <1>;
+		samsung,syscon-phandle = <&pmu_system_controller>;
+		clocks =
+				<&clock GATE_PCIE_GEN4_0_QCH_APB>,
+				<&clock GATE_PCIE_GEN4_0_QCH_DBI>,
+				<&clock GATE_PCIE_GEN4_0_QCH_AXI>,
+				<&clock GATE_PCIE_GEN4_0_QCH_PCS_APB>,
+				<&clock GATE_PCIE_GEN4_0_QCH_REF>,
+				<&clock GATE_PCIE_GEN4_0_QCH_PMA_APB>;
+		pinctrl-names = "active";
+		pinctrl-0 = <&pcie1_clkreq>, <&pcie1_perst>;
+		#address-cells = <3>;
+		#size-cells = <2>;
+		device_type = "pci";
+		ranges = <0x82000000 0x00 0x40000000 0x00 0x40000000 0x00 0xff0000>;
+		ip-ver = <0x984000>;
+		num-lanes = <2>;
+		ch-num = <1>;
+		pcie-clk-num = <0>;
+		phy-clk-num = <0>;
+		pcie-pm-qos-int = <267000>;
+		use-cache-coherency = "true";
+		use-pcieon-sleep = "true";
+		use-msi = "false";
+		use-sicd = "true";
+		use-sysmmu = "false";
+		use-ia = "false";
+		pmu-offset = <0x720>;
+		max-link-speed = <EP_QC_MODEM>;
+		status = "disabled";
+	};
+};

@@ -1,0 +1,217 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos2100 SoC device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ */
+
+/ {
+	reserved_memory: reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <1>;
+		ranges;
+
+		ect_binary: ect_binary {
+			compatible = "exynos,ect_rmem";
+			reg = <0x00 0x90000000 0x3a000>;
+		};
+
+		el3mon_reserve {
+			compatible = "exynos,el3mon";
+			reg = <0x00 0xbff80000 0x80000>;
+		};
+
+		ramoops@8f000000 {
+			compatible = "ramoops";
+			reg = <0x00 0x8f000000 0x40000>;
+			record-size = <0x20000>;
+			pmsg-size = <0x20000>;
+		};
+
+		sec_rdx_bootdev {
+			compatible = "exynos,sec_debug_rdx_bootdev";
+			no-ship;
+			reg = <0x08 0xb0000000 0xb600000>;
+		};
+
+		dss_rmem: debug_snapshot {
+			#address-cells = <2>;
+			#size-cells = <1>;
+
+			header: header {
+				reg = <0x00 0xf0000000 0x10000>;
+				no-map;
+			};
+
+			log_kernel: log_kernel {
+				reg = <0x00 0xf0010000 0x200000>;
+			};
+
+			log_platform: log_platform {
+				reg = <0x00 0xf0210000 0x400000>;
+			};
+
+			log_s2d: log_s2d {
+				reg = <0x00 0xf0610000 0x1200000>;
+			};
+
+			log_first: log_first {
+				reg = <0x00 0xf1810000 0x200000>;
+			};
+
+			log_init: log_init {
+				reg = <0x00 0xf1a10000 0x40000>;
+			};
+
+			log_arrdumpreset: log_arrdumpreset {
+				reg = <0x00 0xf1a50000 0xb00000>;
+			};
+
+			log_arrdumppanic: log_arrdumppanic {
+				reg = <0x00 0xf2550000 0x600000>;
+			};
+
+			log_kevents: log_kevents {
+				reg = <0x00 0xf2b50000 0x600000>;
+			};
+
+			log_fatal: log_fatal {
+				reg = <0x00 0xf3150000 0x400000>;
+			};
+		};
+
+		log_teegris: log_teegris {
+			reg = <0x00 0xf4b00000 0x10000>;
+		};
+
+		log_bcm: log_bcm {
+			compatible = "exynos,bcmdbg";
+			reg = <0x00 0xff000000 0x400000>;
+		};
+
+		log_llc: log_llc {
+			compatible = "exynos,llc";
+			reg = <0x00 0xff400000 0x800000>;
+		};
+
+		log_ppc: log_ppc {
+			compatible = "exynos,ppc";
+			reg = <0x00 0xffc00000 0x100000>;
+		};
+
+		seclog_mem: seclog_mem {
+			compatible = "exynos,seclog";
+			reg = <0x00 0xc3000000 0x80000>;
+		};
+
+		s2mpu_table: s2mpu_table {
+			compatible = "exynos,s2mpu_table";
+			reg = <0x00 0xc1800000 0x800000>;
+		};
+
+		cp_rmem: cp_rmem {
+			compatible = "exynos,modem_if";
+			reg = <0x08 0x80000000 0xd800000>;
+			rmem_index = <0>;
+		};
+
+		cp_rmem1: cp_rmem1 {
+			compatible = "exynos,modem_if";
+			reg = <0x08 0x90000000 0xa000000>;
+			rmem_index = <1>;
+		};
+
+		dummy_heap: dummy_heap {
+			compatible = "shared-dma-pool";
+			reg = <0x08 0x9e000000 0x2000000>;
+			alignment = <0x00 0x400000>;
+			reusable;
+		};
+
+		camera_rmem: camera_rmem {
+			compatible = "exynos,camera_rmem";
+			reg = <0x00 0xed210000 0x100000>;
+		};
+
+		camera_ddk: camera_ddk {
+			compatible = "exynos,camera_ddk";
+			size = <0xe60000>;
+			alloc-ranges = <0x0a 0x00 0x10000000 0x00 0x40000000 0xb0000000>;
+			no-map;
+			alignment = <0x00 0x200000>;
+		};
+
+		abox_dbg: abox-dbg {
+			compatible = "exynos,abox_dbg";
+			size = <0x2900000>;
+			alloc-ranges = <0x00 0xc0000000 0x20000000>;
+		};
+
+		abox_slog: abox-slog {
+			compatible = "exynos,abox_slog";
+			reg = <0x08 0x9a800000 0x2800000>;
+		};
+
+		abox_rmem: abox-rmem {
+			compatible = "exynos,abox_rmem";
+			reg = <0x08 0x8d800000 0x2800000>;
+		};
+
+		abox_rdma_compr: abox-rdma-compr {
+			compatible = "exynos,abox_rdma_compr_buffer";
+			size = <0x50000>;
+			alloc-ranges = <0x00 0xc0000000 0x20000000>;
+		};
+
+		dp_ado_rmem: dpado-rmem {
+			compatible = "exynos,dp_ado_rmem";
+			size = <0x200000>;
+			alloc-ranges = <0x00 0xc0000000 0x20000000>;
+		};
+
+		memlog_mem: memlog_region {
+			compatible = "shared-dma-pool";
+			no-map;
+			reg = <0x08 0x9a000000 0x800000>;
+		};
+
+		default_cma {
+			compatible = "shared-dma-pool";
+			reg = <0x08 0x9d000000 0x1000000>;
+			alignment = <0x00 0x400000>;
+			reusable;
+			linux,cma-default;
+		};
+
+		dsp_shmem: dsp-shmem {
+			compatible = "exynos,dsp_shmem";
+			size = <0x1000>;
+			alloc-ranges = <0x00 0xc0000000 0x40000000>;
+		};
+
+		dsp_master_rmem: dsp-master-rmem {
+			compatible = "exynos,dsp_master_rmem";
+			size = <0x110000>;
+			alloc-ranges = <0x00 0xc0000000 0x40000000>;
+		};
+
+		memlog_bl_base: memlog_bl_base {
+			samsung,bl-base = <0xf0000000>;
+			samsung,bl-offset = <0x290>;
+		};
+
+		npu_fw_rmem: npu-fw-rmem {
+			compatible = "exynos,npu_fw_rmem";
+			size = <0x200000>;
+			alignment = <0x00 0x10000>;
+			alloc-ranges = <0x00 0xc0000000 0x40000000>;
+		};
+
+		vfw_heap: vfw_heap {
+			size = <0x400000>;
+			alignment = <0x00 0x10000>;
+		};
+	};
+};

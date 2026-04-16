@@ -1,0 +1,84 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos2100 SoC device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ */
+
+//#include <dt-bindings/ufs/ufs.h>
+
+/ {
+	sysreg_hsi1_ufs: sysreg_hsi1_ufs@11020000 {
+		compatible = "samsung,exynos991-sysreg-hsi1-ufs", "syscon";
+		reg = <0x00 0x11020000 0x1000>;
+	};
+
+	ufs: ufs@0x13100000 {
+		compatible = "samsung,exynos-ufs";
+		#address-cells = <2>;
+		#size-cells = <1>;
+		ranges;
+		reg = <
+				0x00 0x13100000 0x200
+				0x00 0x13101100 0x200
+				0x00 0x13180000 0x8000
+				0x00 0x132a0000 0x100
+				0x00 0x13104000 0x4000
+				0x00 0x13108000 0x804>;
+		interrupts = <GIC_SPI INTREQ__UFS_EMBD IRQ_TYPE_LEVEL_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&ufs_rst_n>, <&ufs_refclk_out>, <&ufs_boot_ldo>;
+		clocks = <&clock GATE_UFS_EMBD_QCH>, <&clock UFS_EMBD>;
+		clock-names = "GATE_UFS_EMBD", "UFS_EMBD";
+		freq-table-hz = <0 0>, <0 0>;
+		vcc-supply = <&ufs_fixed_vcc>;
+		vcc-fixed-regulator;
+
+		/* power mode change */
+		ufs,pmd-attr-lane = /bits/ 8 <2>;
+		ufs,pmd-attr-gear = /bits/ 8 <4>;
+		evt-ver = /bits/ 8 <1>;
+		dma-coherent;
+		samsung,pmu-phandle = <&pmu_system_controller>;
+		samsung,sysreg-phandle = <&sysreg_hsi1_ufs>;
+		fmp-id = <0>;
+		smu-id = <0>;
+		sec,wb-enable;
+		sec,wb-up-threshold-block = <3072>;
+		sec,wb-up-threshold-rqs = <30>;
+		sec,wb-down-threshold-block = <1536>;
+		sec,wb-down-threshold-rqs = <25>;
+		sec,wb-disable-threshold-lt = <9>;
+		sec,wb-on-delay-ms = <92>;
+		sec,wb-off-delay-ms = <4500>;
+
+		phy-tcxo-con {
+			offset = <0x3e10>;
+			mask = <0x08>;
+			val = <0x01>;
+		};
+
+		ufs-phy-iso {
+			offset = <0x728>;
+			mask = <0x01>;
+			val = <0x01>;
+		};
+
+		ufs-iocc {
+			offset = <0x700>;
+			mask = <0x300000>;
+			val = <0x300000>;
+		};
+		ufs-pm-qos { freq-int = <267000>; };
+	};
+
+	ufs_fixed_vcc: fixedregulator@0 {
+		compatible = "regulator-fixed";
+		regulator-name = "ufs-vcc";
+		gpio = <&gpg2 0x00 0x00>;
+		regulator-boot-on;
+		enable-active-high;
+	};
+};

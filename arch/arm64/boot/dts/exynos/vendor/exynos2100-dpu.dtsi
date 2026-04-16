@@ -1,0 +1,863 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos2100 SoC device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+*/
+
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/interrupt-controller/exynos2100.h>
+#include <dt-bindings/display/exynos-display.h>
+#include <dt-bindings/clock/exynos2100.h>
+#include "exynos2100-display.dtsi"
+
+/ {
+	aliases {
+		panel0 = &panel_0;
+		dpp0 = &dpp_0;
+		dpp1 = &dpp_1;
+		dpp2 = &dpp_2;
+		dpp3 = &dpp_3;
+		dpp4 = &dpp_4;
+		dpp5 = &dpp_5;
+		dpp6 = &dpp_6;
+		dpp7 = &dpp_7;
+		dpp8 = &dpp_8;
+		dpp9 = &dpp_9;
+		dpp10 = &dpp_10;
+		dpp11 = &dpp_11;
+		dpp12 = &dpp_12;
+		dpp13 = &dpp_13;
+		dpp14 = &dpp_14;
+		dpp15 = &dpp_15;
+		dpp16 = &dpp_16;
+		fcmd0 = &dma_dsimfc_0;
+		fcmd1 = &dma_dsimfc_1;
+		fcmd2 = &dma_dsimfc_2;
+		dsim0 = &dsim_0;
+		displayport = &displayport;
+		decon0 = &decon_0;
+		decon1 = &decon_1;
+		decon2 = &decon_2;
+		decon3 = &decon_3;
+	};
+
+	dpp_0: dpp@0x19CB0000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <
+			0x00 0x19cb0000 0x1000
+			0x00 0x19cd0000 0x1000
+			0x00 0x19cb0000 0x110
+			0x00 0x19ca0000 0x500>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF0_DMA_L0 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF0_DPP_L0 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50004>;
+		port = <0>;
+		src_f_w = <32 65534 1>;
+		src_f_h = <16 8190 1>;
+		src_w = <32 4096 1>;
+		src_h = <16 4320 1>;
+		src_xy_align = <1 1>;
+		dst_f_w = <32 8190 1>;
+		dst_f_h = <16 8190 1>;
+		dst_w = <32 4096 1>;
+		dst_h = <16 4320 1>;
+		dst_xy_align = <1 1>;
+		blk_w = <4 4096 1>;
+		blk_h = <1 4320 1>;
+		blk_xy_align = <1 1>;
+		src_w_rot_max = <8192>;
+		src_h_rot_max = <2164>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <6>;
+		fmt = <DECON_PIXEL_FORMAT_RGB_565 DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010 DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102 DECON_PIXEL_FORMAT_BGRA_1010102>;
+	};
+
+	dpp_1: dpp@0x19CB1000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x19cb1000 0x1000 0x00 0x19cd1000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF0_DMA_L1 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF0_DPP_L1 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x5043d>;
+		port = <0>;
+		scale_down = <4>;
+		scale_up = <8>;
+		fmt_cnt = <35>;
+		fmt = <
+			DECON_PIXEL_FORMAT_RGB_565
+			DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010
+			DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102
+			DECON_PIXEL_FORMAT_BGRA_1010102
+			DECON_PIXEL_FORMAT_NV16
+			DECON_PIXEL_FORMAT_NV61
+			DECON_PIXEL_FORMAT_NV12
+			DECON_PIXEL_FORMAT_NV21
+			DECON_PIXEL_FORMAT_NV12M
+			DECON_PIXEL_FORMAT_NV21M
+			DECON_PIXEL_FORMAT_NV12N
+			DECON_PIXEL_FORMAT_NV12N_10B
+			DECON_PIXEL_FORMAT_NV12M_P010
+			DECON_PIXEL_FORMAT_NV21M_P010
+			DECON_PIXEL_FORMAT_NV16M_P210
+			DECON_PIXEL_FORMAT_NV61M_P210
+			DECON_PIXEL_FORMAT_NV12_P010
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L80
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L80>;
+	};
+
+	dpp_2: dpp@0x19CB2000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x19cb2000 0x1000 0x00 0x19cd2000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF0_DMA_L2 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF0_DPP_L2 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50005>;
+		port = <0>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <6>;
+		fmt = <DECON_PIXEL_FORMAT_RGB_565 DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010 DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102 DECON_PIXEL_FORMAT_BGRA_1010102>;
+	};
+
+	dpp_3: dpp@0x19CB3000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x19cb3000 0x1000 0x00 0x19cd3000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF0_DMA_L3 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF0_DPP_L3 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50434>;
+		port = <0>;
+		scale_down = <4>;
+		scale_up = <8>;
+		fmt_cnt = <35>;
+		fmt = <
+			DECON_PIXEL_FORMAT_RGB_565
+			DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010
+			DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102
+			DECON_PIXEL_FORMAT_BGRA_1010102
+			DECON_PIXEL_FORMAT_NV16
+			DECON_PIXEL_FORMAT_NV61
+			DECON_PIXEL_FORMAT_NV12
+			DECON_PIXEL_FORMAT_NV21
+			DECON_PIXEL_FORMAT_NV12M
+			DECON_PIXEL_FORMAT_NV21M
+			DECON_PIXEL_FORMAT_NV12N
+			DECON_PIXEL_FORMAT_NV12N_10B
+			DECON_PIXEL_FORMAT_NV12M_P010
+			DECON_PIXEL_FORMAT_NV21M_P010
+			DECON_PIXEL_FORMAT_NV16M_P210
+			DECON_PIXEL_FORMAT_NV61M_P210
+			DECON_PIXEL_FORMAT_NV12_P010
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L80
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L80>;
+	};
+
+	dpp_4: dpp@0x19CB4000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x19cb4000 0x1000 0x00 0x19cd4000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF0_DMA_L4 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF0_DPP_L4 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50005>;
+		port = <1>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <6>;
+		fmt = <DECON_PIXEL_FORMAT_RGB_565 DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010 DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102 DECON_PIXEL_FORMAT_BGRA_1010102>;
+	};
+
+	dpp_5: dpp@0x19CB5000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x19cb5000 0x1000 0x00 0x19cd5000 0x1000>;
+		interrupts =
+				<GIC_SPI INTREQ__DPUF0_DMA_L5 IRQ_TYPE_LEVEL_HIGH>,
+				<GIC_SPI INTREQ__DPUF0_DPP_L5 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50014>;
+		port = <1>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <19>;
+		fmt = <
+			DECON_PIXEL_FORMAT_RGB_565
+			DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010
+			DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102
+			DECON_PIXEL_FORMAT_BGRA_1010102
+			DECON_PIXEL_FORMAT_NV16
+			DECON_PIXEL_FORMAT_NV61
+			DECON_PIXEL_FORMAT_NV12
+			DECON_PIXEL_FORMAT_NV21
+			DECON_PIXEL_FORMAT_NV12M
+			DECON_PIXEL_FORMAT_NV21M
+			DECON_PIXEL_FORMAT_NV12N
+			DECON_PIXEL_FORMAT_NV12N_10B
+			DECON_PIXEL_FORMAT_NV12M_P010
+			DECON_PIXEL_FORMAT_NV21M_P010
+			DECON_PIXEL_FORMAT_NV16M_P210
+			DECON_PIXEL_FORMAT_NV61M_P210
+			DECON_PIXEL_FORMAT_NV12_P010>;
+	};
+
+	dpp_6: dpp@0x19CB6000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x19cb6000 0x1000 0x00 0x19cd6000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF0_DMA_L6 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF0_DPP_L6 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50004>;
+		port = <1>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <6>;
+		fmt = <DECON_PIXEL_FORMAT_RGB_565 DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010 DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102 DECON_PIXEL_FORMAT_BGRA_1010102>;
+	};
+
+	dpp_7: dpp@0x19CB7000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x19cb7000 0x1000 0x00 0x19cd7000 0x1000>;
+		interrupts =
+				<GIC_SPI INTREQ__DPUF0_DMA_L7 IRQ_TYPE_LEVEL_HIGH>,
+				<GIC_SPI INTREQ__DPUF0_DPP_L7 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50435>;
+		port = <1>;
+		scale_down = <4>;
+		scale_up = <8>;
+		fmt_cnt = <35>;
+		fmt = <
+			DECON_PIXEL_FORMAT_RGB_565
+			DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010
+			DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102
+			DECON_PIXEL_FORMAT_BGRA_1010102
+			DECON_PIXEL_FORMAT_NV16
+			DECON_PIXEL_FORMAT_NV61
+			DECON_PIXEL_FORMAT_NV12
+			DECON_PIXEL_FORMAT_NV21
+			DECON_PIXEL_FORMAT_NV12M
+			DECON_PIXEL_FORMAT_NV21M
+			DECON_PIXEL_FORMAT_NV12N
+			DECON_PIXEL_FORMAT_NV12N_10B
+			DECON_PIXEL_FORMAT_NV12M_P010
+			DECON_PIXEL_FORMAT_NV21M_P010
+			DECON_PIXEL_FORMAT_NV16M_P210
+			DECON_PIXEL_FORMAT_NV61M_P210
+			DECON_PIXEL_FORMAT_NV12_P010
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L80
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L80>;
+	};
+
+	dpp_8: dpp@0x1AEB1000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <
+			0x00 0x1aeb0000 0x1000
+			0x00 0x1aed0000 0x1000
+			0x00 0x1aea0000 0x500>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF1_DMA_L0 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF1_DPP_L0 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50004>;
+		port = <2>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <6>;
+		fmt = <DECON_PIXEL_FORMAT_RGB_565 DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010 DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102 DECON_PIXEL_FORMAT_BGRA_1010102>;
+	};
+
+	dpp_9: dpp@0x1AEB2000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x1aeb1000 0x1000 0x00 0x1aed1000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF1_DMA_L1 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF1_DPP_L1 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x5043d>;
+		port = <2>;
+		scale_down = <4>;
+		scale_up = <8>;
+		fmt_cnt = <35>;
+		fmt = <
+			DECON_PIXEL_FORMAT_RGB_565
+			DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010
+			DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102
+			DECON_PIXEL_FORMAT_BGRA_1010102
+			DECON_PIXEL_FORMAT_NV16
+			DECON_PIXEL_FORMAT_NV61
+			DECON_PIXEL_FORMAT_NV12
+			DECON_PIXEL_FORMAT_NV21
+			DECON_PIXEL_FORMAT_NV12M
+			DECON_PIXEL_FORMAT_NV21M
+			DECON_PIXEL_FORMAT_NV12N
+			DECON_PIXEL_FORMAT_NV12N_10B
+			DECON_PIXEL_FORMAT_NV12M_P010
+			DECON_PIXEL_FORMAT_NV21M_P010
+			DECON_PIXEL_FORMAT_NV16M_P210
+			DECON_PIXEL_FORMAT_NV61M_P210
+			DECON_PIXEL_FORMAT_NV12_P010
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L80
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L80>;
+	};
+
+	dpp_10: dpp@0x1AEB3000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x1aeb2000 0x1000 0x00 0x1aed2000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF1_DMA_L2 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF1_DPP_L2 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50005>;
+		port = <2>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <6>;
+		fmt = <DECON_PIXEL_FORMAT_RGB_565 DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010 DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102 DECON_PIXEL_FORMAT_BGRA_1010102>;
+	};
+
+	dpp_11: dpp@0x1AEB4000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x1aeb3000 0x1000 0x00 0x1aed3000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF1_DMA_L3 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF1_DPP_L3 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50434>;
+		port = <2>;
+		scale_down = <4>;
+		scale_up = <8>;
+		fmt_cnt = <35>;
+		fmt = <
+			DECON_PIXEL_FORMAT_RGB_565
+			DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010
+			DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102
+			DECON_PIXEL_FORMAT_BGRA_1010102
+			DECON_PIXEL_FORMAT_NV16
+			DECON_PIXEL_FORMAT_NV61
+			DECON_PIXEL_FORMAT_NV12
+			DECON_PIXEL_FORMAT_NV21
+			DECON_PIXEL_FORMAT_NV12M
+			DECON_PIXEL_FORMAT_NV21M
+			DECON_PIXEL_FORMAT_NV12N
+			DECON_PIXEL_FORMAT_NV12N_10B
+			DECON_PIXEL_FORMAT_NV12M_P010
+			DECON_PIXEL_FORMAT_NV21M_P010
+			DECON_PIXEL_FORMAT_NV16M_P210
+			DECON_PIXEL_FORMAT_NV61M_P210
+			DECON_PIXEL_FORMAT_NV12_P010
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L80
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L80>;
+		lib_reserved;
+	};
+
+	dpp_12: dpp@0x1AEB5000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x1aeb4000 0x1000 0x00 0x1aed4000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF1_DMA_L4 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF1_DPP_L4 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50005>;
+		port = <3>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <6>;
+		fmt = <DECON_PIXEL_FORMAT_RGB_565 DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010 DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102 DECON_PIXEL_FORMAT_BGRA_1010102>;
+	};
+
+	dpp_13: dpp@0x1AEB6000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x1aeb5000 0x1000 0x00 0x1aed5000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF1_DMA_L5 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF1_DPP_L5 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50014>;
+		port = <3>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <19>;
+		fmt = <
+			DECON_PIXEL_FORMAT_RGB_565
+			DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010
+			DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102
+			DECON_PIXEL_FORMAT_BGRA_1010102
+			DECON_PIXEL_FORMAT_NV16
+			DECON_PIXEL_FORMAT_NV61
+			DECON_PIXEL_FORMAT_NV12
+			DECON_PIXEL_FORMAT_NV21
+			DECON_PIXEL_FORMAT_NV12M
+			DECON_PIXEL_FORMAT_NV21M
+			DECON_PIXEL_FORMAT_NV12N
+			DECON_PIXEL_FORMAT_NV12N_10B
+			DECON_PIXEL_FORMAT_NV12M_P010
+			DECON_PIXEL_FORMAT_NV21M_P010
+			DECON_PIXEL_FORMAT_NV16M_P210
+			DECON_PIXEL_FORMAT_NV61M_P210
+			DECON_PIXEL_FORMAT_NV12_P010>;
+	};
+
+	dpp_14: dpp@0x1AEB7000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x1aeb6000 0x1000 0x00 0x1aed6000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF1_DMA_L6 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF1_DPP_L6 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50004>;
+		port = <3>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <6>;
+		fmt = <DECON_PIXEL_FORMAT_RGB_565 DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010 DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102 DECON_PIXEL_FORMAT_BGRA_1010102>;
+	};
+
+	dpp_15: dpp@0x1AEB8000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x1aeb7000 0x1000 0x00 0x1aed7000 0x1000>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUF1_DMA_L7 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUF1_DPP_L7 IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0x50435>;
+		port = <3>;
+		scale_down = <4>;
+		scale_up = <8>;
+		fmt_cnt = <35>;
+		fmt = <
+			DECON_PIXEL_FORMAT_RGB_565
+			DECON_PIXEL_FORMAT_BGR_565
+			DECON_PIXEL_FORMAT_ARGB_2101010
+			DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102
+			DECON_PIXEL_FORMAT_BGRA_1010102
+			DECON_PIXEL_FORMAT_NV16
+			DECON_PIXEL_FORMAT_NV61
+			DECON_PIXEL_FORMAT_NV12
+			DECON_PIXEL_FORMAT_NV21
+			DECON_PIXEL_FORMAT_NV12M
+			DECON_PIXEL_FORMAT_NV21M
+			DECON_PIXEL_FORMAT_NV12N
+			DECON_PIXEL_FORMAT_NV12N_10B
+			DECON_PIXEL_FORMAT_NV12M_P010
+			DECON_PIXEL_FORMAT_NV21M_P010
+			DECON_PIXEL_FORMAT_NV16M_P210
+			DECON_PIXEL_FORMAT_NV61M_P210
+			DECON_PIXEL_FORMAT_NV12_P010
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_8B
+			DECON_PIXEL_FORMAT_NV21M_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12M_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L50
+			DECON_PIXEL_FORMAT_NV12N_SBWC_8B_L75
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12M_SBWC_10B_L80
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L40
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L60
+			DECON_PIXEL_FORMAT_NV12N_SBWC_10B_L80>;
+	};
+
+	dpp_16: dpp@0x19CBC000 {
+		compatible = "samsung,exynos9-dpp";
+		#pb-id-cells = <3>;
+		reg = <0x00 0x19cba000 0x1000 0x00 0x19cda000 0x1000>;
+		interrupts = <GIC_SPI INTREQ__DPUF0_DMA_WB IRQ_TYPE_LEVEL_HIGH>;
+		attr = <0xe0010>;
+		port = <1>;
+		scale_down = <1>;
+		scale_up = <1>;
+		fmt_cnt = <17>;
+		fmt = <
+			DECON_PIXEL_FORMAT_ARGB_2101010
+			DECON_PIXEL_FORMAT_ABGR_2101010
+			DECON_PIXEL_FORMAT_RGBA_1010102
+			DECON_PIXEL_FORMAT_BGRA_1010102
+			DECON_PIXEL_FORMAT_NV16
+			DECON_PIXEL_FORMAT_NV61
+			DECON_PIXEL_FORMAT_NV12
+			DECON_PIXEL_FORMAT_NV21
+			DECON_PIXEL_FORMAT_NV12M
+			DECON_PIXEL_FORMAT_NV21M
+			DECON_PIXEL_FORMAT_NV12N
+			DECON_PIXEL_FORMAT_NV12N_10B
+			DECON_PIXEL_FORMAT_NV12M_P010
+			DECON_PIXEL_FORMAT_NV21M_P010
+			DECON_PIXEL_FORMAT_NV16M_P210
+			DECON_PIXEL_FORMAT_NV61M_P210
+			DECON_PIXEL_FORMAT_NV12_P010>;
+		iommus =
+			<&sysmmu_d0_dpuf0>,
+			<&sysmmu_d1_dpuf0>,
+			<&sysmmu_d0_dpuf1>,
+			<&sysmmu_d1_dpuf1>;
+		samsung,iommu-group = <&iommu_group_dpu>;
+		samsung,tzmp;
+		clock-names = "aclk";
+		clocks = <&clock GATE_DPUB_QCH>;
+	};
+
+	dma_dsimfc_0: fcmd@0x19CBC000 {
+		compatible = "samsung,exynos9-fcmd";
+		reg = <0x00 0x19cbc000 0x1000>;
+		interrupts = <GIC_SPI INTREQ__DPUF0_DMA_DSIMFC0 IRQ_TYPE_LEVEL_HIGH>;
+		port = <0>;
+	};
+
+	dma_dsimfc_1: fcmd@0x19CBD000 {
+		compatible = "samsung,exynos9-fcmd";
+		reg = <0x00 0x19cbd000 0x1000>;
+		interrupts = <GIC_SPI INTREQ__DPUF0_DMA_DSIMFC1 IRQ_TYPE_LEVEL_HIGH>;
+		port = <1>;
+	};
+
+	dma_dsimfc_2: fcmd@0x1AEBC000 {
+		compatible = "samsung,exynos9-fcmd";
+		reg = <0x00 0x1aebc000 0x1000>;
+		interrupts = <GIC_SPI INTREQ__DPUF1_DMA_DSIMFC0 IRQ_TYPE_LEVEL_HIGH>;
+		port = <2>;
+	};
+
+	disp_ss: disp_ss@0x19E20000 {
+		compatible = "samsung,exynos9-disp_ss";
+		reg = <0x00 0x19e21000 0x10>;
+	};
+
+	mipi_phy_dsim0_m4m4: dphy_m4m4_dsim0@0x15860000 {
+		compatible = "samsung,mipi-phy-m4m4-top";
+		samsung,pmu-syscon = <&pmu_system_controller>;
+		isolation = <0x714>;
+		owner = <0>;
+		#phy-cells = <1>;
+	};
+
+	dsim_0: dsim@0x19EC0000 {
+		compatible = "samsung,exynos9-dsim";
+		reg = <
+			0x00 0x19ec0000 0x300
+			0x00 0x19ee0100 0x700
+			0x00 0x19ee0000 0x100
+			0x00 0x189e0000 0x10000>;
+		interrupts = <GIC_SPI INTREQ__DPUB_DSIM0 IRQ_TYPE_LEVEL_HIGH>;
+		iommus =
+			<&sysmmu_d0_dpuf0>,
+			<&sysmmu_d1_dpuf0>,
+			<&sysmmu_d0_dpuf1>,
+			<&sysmmu_d1_dpuf1>;
+		samsung,iommu-group = <&iommu_group_dpu>;
+		samsung,tzmp;
+		clock-names = "aclk";
+		clocks = <&clock GATE_DPUB_QCH>;
+		phys = <&mipi_phy_dsim0_m4m4 0x00>;
+		phy-names = "dsim_dphy";
+	};
+
+	panel_0: panel_0 {
+		compatible = "samsung,exynos-panel";
+		ddi_id = <1>;
+		lcd_info = <&s6e3hab>, <&s6e3fab>, <&s6e3had>, <&s6e3ha9>, <&s6e3ha8>;
+	};
+
+	displayport: displayport@0x10AB0000 {
+		compatible = "samsung,exynos-displayport";
+		reg = <0x00 0x10ab0000 0x6da8 0x00 0x10ae0000 0x263c>;
+		interrupts = <GIC_SPI INTREQ__DP_LINK IRQ_TYPE_LEVEL_HIGH>;
+		iommus =
+			<&sysmmu_d0_dpuf0>,
+			<&sysmmu_d1_dpuf0>,
+			<&sysmmu_d0_dpuf1>,
+			<&sysmmu_d1_dpuf1>;
+		samsung,iommu-group = <&iommu_group_dpu>;
+		samsung,tzmp;
+		clock-names = "aclk";
+		clocks = <&clock GATE_DPUB_QCH>;
+	};
+
+	decon_0: decon_0@0x19F00000 {
+		compatible = "samsung,exynos9-decon";
+		#pb-id-cells = <4>;
+		reg = <
+			0x00 0x19f00000 0xffff
+			0x00 0x19f10000 0xffff
+			0x00 0x19f20000 0xffff
+			0x00 0x19f30000 0xffff
+			0x00 0x19f70000 0xffff>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUB_DECON0_FRAME_START IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUB_DECON0_FRAME_DONE IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUB_DECON0_EXTRA IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__GPIO_PERIC1 IRQ_TYPE_LEVEL_HIGH>;
+		pinctrl-names = "hw_te_on", "hw_te_off";
+		pinctrl-0 = <&decon_0_te_on>;
+		pinctrl-1 = <&decon_0_te_off>;
+		max_win = <16>;
+		default_win = <13>;
+		default_ch = <1>;
+		psr_mode = <2>;
+		trig_mode = <0>;
+		dsi_mode = <0>;
+		out_type = <0>;
+		out_idx = <0>;
+		ppc = <2>;
+		ppc_rotator = <8>;
+		ppc_scaler = <4>;
+		delay_comp = <4>;
+		delay_scaler = <3>;
+		inner_width = <16>;
+		bus_width = <32>;
+		rot_util = <35>;
+		bw_weight = <100>;
+		dfs_lv_cnt = <8>;
+		dfs_lv = <663000 533000 468000 400000 332000 267000 117000 50000>;
+		chip_ver = <2100>;
+		dpp_cnt = <17>;
+		dsim_cnt = <1>;
+		decon_cnt = <4>;
+		cursor_margin = <5>;
+		#address-cells = <2>;
+		#size-cells = <1>;
+		ranges;
+		gpios = <&gpg1 0x04 0x0f>;
+
+		te_eint {
+			reg = <0x00 0x10730a1c 0x04>;
+		};
+	};
+
+	decon_1: decon_1@0x19F01000 {
+		compatible = "samsung,exynos9-decon";
+		#pb-id-cells = <4>;
+		reg = <
+			0x00 0x19f01000 0xffff
+			0x00 0x19f10000 0xffff
+			0x00 0x19f20000 0xffff
+			0x00 0x19f40000 0xffff>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUB_DECON1_FRAME_START IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUB_DECON1_FRAME_DONE IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUB_DECON1_EXTRA IRQ_TYPE_LEVEL_HIGH>;
+		max_win = <16>;
+		default_win = <3>;
+		default_ch = <0>;
+		psr_mode = <0>;
+		trig_mode = <0>;
+		dsi_mode = <0>;
+		out_type = <3>;
+		out_idx = <0>;
+		ppc = <2>;
+		ppc_rotator = <8>;
+		ppc_scaler = <4>;
+		delay_comp = <4>;
+		delay_scaler = <3>;
+		inner_width = <16>;
+		bus_width = <32>;
+		rot_util = <35>;
+		bw_weight = <100>;
+		dfs_lv_cnt = <8>;
+		dfs_lv = <663000 533000 468000 400000 332000 267000 117000 50000>;
+		sbwc_lib_boost = <660>;
+		chip_ver = <2100>;
+		dpp_cnt = <17>;
+		dsim_cnt = <1>;
+		decon_cnt = <4>;
+		cursor_margin = <40>;
+		#address-cells = <2>;
+		#size-cells = <1>;
+		ranges;
+	};
+
+	decon_2: decon_2@0x19F02000 {
+		compatible = "samsung,exynos9-decon";
+		#pb-id-cells = <4>;
+		reg = <
+			0x00 0x19f02000 0xffff
+			0x00 0x19f10000 0xffff
+			0x00 0x19f20000 0xffff
+			0x00 0x19f50000 0xffff>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUB_DECON2_FRAME_START IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUB_DECON2_FRAME_DONE IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUB_DECON2_EXTRA IRQ_TYPE_LEVEL_HIGH>;
+		max_win = <16>;
+		default_win = <4>;
+		default_ch = <2>;
+		psr_mode = <0>;
+		trig_mode = <0>;
+		dsi_mode = <0>;
+		out_type = <2>;
+		out_idx = <0>;
+		ppc = <2>;
+		ppc_rotator = <8>;
+		ppc_scaler = <4>;
+		delay_comp = <4>;
+		delay_scaler = <3>;
+		inner_width = <16>;
+		bus_width = <32>;
+		rot_util = <35>;
+		bw_weight = <100>;
+		dfs_lv_cnt = <8>;
+		dfs_lv = <663000 533000 468000 400000 332000 267000 117000 50000>;
+		chip_ver = <2100>;
+		dpp_cnt = <17>;
+		dsim_cnt = <1>;
+		decon_cnt = <4>;
+		cursor_margin = <40>;
+		#address-cells = <2>;
+		#size-cells = <1>;
+		ranges;
+	};
+
+	decon_3: decon_3@0x19F03000 {
+		compatible = "samsung,exynos9-decon";
+		#pb-id-cells = <4>;
+		reg = <
+			0x00 0x19f03000 0xffff
+			0x00 0x19f10000 0xffff
+			0x00 0x19f20000 0xffff
+			0x00 0x19f60000 0xffff>;
+		interrupts =
+			<GIC_SPI INTREQ__DPUB_DECON3_FRAME_START IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUB_DECON3_FRAME_DONE IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__DPUB_DECON3_EXTRA IRQ_TYPE_LEVEL_HIGH>;
+		max_win = <16>;
+		default_win = <5>;
+		default_ch = <3>;
+		psr_mode = <0>;
+		trig_mode = <0>;
+		dsi_mode = <0>;
+		out_type = <2>;
+		out_idx = <0>;
+		ppc = <2>;
+		ppc_rotator = <8>;
+		ppc_scaler = <4>;
+		delay_comp = <4>;
+		delay_scaler = <3>;
+		inner_width = <16>;
+		bus_width = <32>;
+		rot_util = <35>;
+		bw_weight = <100>;
+		dfs_lv_cnt = <8>;
+		dfs_lv = <663000 533000 468000 400000 332000 267000 117000 50000>;
+		chip_ver = <2100>;
+		dpp_cnt = <17>;
+		dsim_cnt = <1>;
+		decon_cnt = <4>;
+		cursor_margin = <40>;
+		#address-cells = <2>;
+		#size-cells = <1>;
+		ranges;
+	};
+};

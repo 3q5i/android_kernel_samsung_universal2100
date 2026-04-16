@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos CPU Performance
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ */
+
+#include <dt-bindings/clock/exynos2100.h>
+
+/ {
+	xperf: xperf {
+		compatible = "samsung,exynos-perf";
+		status = "ok";
+		cal-id-mif = <ACPM_DVFS_MIF>;
+		cal-id-g3d = <ACPM_DVFS_G3D>;
+		devfreq-mif = <0>;
+		cal-id-cpucl0 = <ACPM_DVFS_CPUCL0>;
+		cal-id-cpucl1 = <ACPM_DVFS_CPUCL1>;
+		cal-id-cpucl2 = <ACPM_DVFS_CPUCL2>;
+	};
+};

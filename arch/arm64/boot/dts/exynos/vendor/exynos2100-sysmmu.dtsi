@@ -1,0 +1,898 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Exynos2100 SoC device tree source
+ *
+ * Copyright (C) 2026 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ */
+
+#include <dt-bindings/interrupt-controller/exynos2100.h>
+#include <dt-bindings/soc/samsung,sysmmu-v8.h>
+
+/ {
+	sysmmu_d0_dpuf0: sysmmu@19D00000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x19d00000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_DPUF0D0_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_DPUF0D0_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x19d30000>;
+		sysmmu,default_tlb = <TLB_CFG(BL64, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL64, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5, 0xf)>,
+			<2 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x8, 0xf)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x6, 0xf)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xa, 0xf)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xc, 0xf)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1e, 0x1f)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x0, 0xf)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x7, 0xf)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xd, 0xf)>,
+			<10 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xe, 0x1f)>,
+			<11 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xf, 0x1f)>;
+		port-name = "DPUF0 D0";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_DPUF0D0_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_dpuf0>;
+	};
+
+	sysmmu_d1_dpuf0: sysmmu@19D10000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x19d10000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_DPUF0D1_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_DPUF0D1_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x19d40000>;
+		sysmmu,default_tlb = <TLB_CFG(BL16, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xc, 0xf)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xd, 0xf)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0xf)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x4, 0xf)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xe, 0x1f)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1e, 0x1f)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5, 0xf)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x8, 0xf)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xf, 0x1f)>,
+			<10 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x0, 0xf)>,
+			<11 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0xf)>,
+			<12 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x8, 0xf)>;
+		port-name = "DPUF0 D1";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_DPUF0D1_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_dpuf0>;
+	};
+
+	sysmmu_d0_dpuf1: sysmmu@1AF00000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x1af00000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_DPUF1D0_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_DPUF1D0_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x1af30000>;
+		sysmmu,default_tlb = <TLB_CFG(BL64, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL64, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5, 0xf)>,
+			<2 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x8, 0xf)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x6, 0xf)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xa, 0xf)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xc, 0xf)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1e, 0x1f)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x0, 0xf)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x7, 0xf)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xd, 0xf)>,
+			<10 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xe, 0x1f)>,
+			<11 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xf, 0x1f)>;
+		port-name = "DPUF1 D0";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_DPUF1D0_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_dpuf1>;
+	};
+
+	sysmmu_d1_dpuf1: sysmmu@1AF10000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x1af10000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_DPUF1D1_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_DPUF1D1_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x1af40000>;
+		sysmmu,default_tlb = <TLB_CFG(BL16, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xc, 0xf)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0xf)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x4, 0xf)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xe, 0x1f)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5, 0xf)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x8, 0xf)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xd, 0xf)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xf, 0x1f)>;
+		port-name = "DPUF1 D1";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_DPUF1D1_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_dpuf1>;
+	};
+
+	sysmmu_d0_csis: sysmmu@17110000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17110000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D0_CSIS_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D0_CSIS_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17100000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x2, 0xf)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x4, 0xf)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x6, 0xf)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x8, 0xf)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xa, 0xf)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xc, 0xf)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xe, 0xf)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0xf)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x5, 0xf)>,
+			<10 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x9, 0xf)>,
+			<11 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xd, 0xf)>;
+		port-name = "CSIS DMA0,1";
+		#iommu-cells = <0>;
+		clocks = <&clock 0xd8>; /* TODO: unknown clock 0xd8 */
+		clock-names = "aclk";
+		power-domains = <&pd_csis>;
+	};
+
+	sysmmu_d1_csis: sysmmu@17140000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17140000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D1_CSIS_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D1_CSIS_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17130000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x4, 0xf)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x8, 0xf)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xc, 0xf)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0xf)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x5, 0xf)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x9, 0xf)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xd, 0xf)>;
+		port-name = "CSIS DMA2,3";
+		#iommu-cells = <0>;
+		clocks = <&clock 0xdb>; /* TODO: unknown clock 0xdb */
+		clock-names = "aclk";
+		power-domains = <&pd_csis>;
+	};
+
+	sysmmu_d2_csis: sysmmu@17170000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17170000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D2_CSIS_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D2_CSIS_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17160000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x4, 0x7)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0x7)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x2, 0x7)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x3, 0x7)>;
+		port-name = "CSIS ZSL0";
+		#iommu-cells = <0>;
+		clocks = <&clock 0xe2>; /* TODO: unknown clock 0xe2 */
+		clock-names = "aclk";
+		power-domains = <&pd_csis>;
+	};
+
+	sysmmu_d3_csis: sysmmu@171A0000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x171a0000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D3_CSIS_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D3_CSIS_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17190000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x40, 0x7f)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x8, 0x7f)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x10, 0x7f)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x18, 0x7f)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0xf)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0xf)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x9, 0xf)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x2, 0xf)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0xf)>,
+			<10 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x3, 0xf)>,
+			<11 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x3, 0xf)>,
+			<12 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x4, 0xf)>,
+			<13 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x4, 0xf)>,
+			<14 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5, 0xf)>,
+			<15 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x6, 0xf)>,
+			<16 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x20, 0x7f)>,
+			<17 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x28, 0x7f)>,
+			<18 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x7, 0xf)>;
+		port-name = "CSIS STRP,PDP";
+		#iommu-cells = <0>;
+		clocks = <&clock 0xe5>; /* TODO: unknown clock 0xe5 */
+		clock-names = "aclk";
+		power-domains = <&pd_csis>;
+	};
+
+	sysmmu_d_lme: sysmmu@17770000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17770000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D_LME_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D_LME_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17780000>;
+		sysmmu,default_tlb = <TLB_CFG(BL2, PREFETCH_NONE)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x0, 0x7)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x2, 0x7)>,
+			<3 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x3, 0x7)>;
+		port-name = "LME";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D_LME_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_lme>;
+	};
+
+	sysmmu_d_taa: sysmmu@16E40000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x16e40000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_TAA_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_TAA_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x16e30000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x80, 0x1ff)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x100, 0x1ff)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x180, 0x1ff)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0x1ff)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x81, 0x1ff)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x101, 0x1ff)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x181, 0x1ff)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x2, 0x1ff)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x22, 0x1ff)>,
+			<10 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x42, 0x1ff)>,
+			<11 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x82, 0x1ff)>,
+			<12 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xa2, 0x1ff)>,
+			<13 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xc2, 0x1ff)>,
+			<14 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x102, 0x1ff)>,
+			<15 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x122, 0x1ff)>,
+			<16 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x142, 0x1ff)>,
+			<17 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x182, 0x1ff)>,
+			<18 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1a2, 0x1ff)>,
+			<19 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1c2, 0x1ff)>,
+			<20 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x3, 0x1ff)>,
+			<21 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x84, 0x1ff)>,
+			<22 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x105, 0x1ff)>,
+			<23 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x186, 0x1ff)>,
+			<24 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x7, 0x1ff)>,
+			<25 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x87, 0x1ff)>,
+			<26 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x107, 0x1ff)>,
+			<27 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x187, 0x1ff)>,
+			<28 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x8, 0x1ff)>,
+			<29 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x88, 0x1ff)>,
+			<30 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x108, 0x1ff)>,
+			<31 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x188, 0x1ff)>,
+			<32 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x9, 0x1ff)>,
+			<33 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x89, 0x1ff)>,
+			<34 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x109, 0x1ff)>,
+			<35 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x189, 0x1ff)>,
+			<36 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xa, 0x1ff)>,
+			<37 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x8a, 0x1ff)>,
+			<38 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x10a, 0x1ff)>,
+			<39 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x18a, 0x1ff)>,
+			<40 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0xb, 0x1f)>,
+			<41 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0xc, 0x1f)>;
+		port-name = "TAA";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D_TAA_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_taa>;
+	};
+
+	sysmmu_d_yuvpp: sysmmu@18080000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x18080000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_YUVPP_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_YUVPP_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x18090000>;
+		sysmmu,default_tlb = <TLB_CFG(BL4, PREFETCH_NONE)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL4, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x0, 0x3)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0x7)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5, 0x7)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0x7)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x6, 0x7)>,
+			<6 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x3, 0x7)>;
+		port-name = "YUVPP, FRC_MC";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D_YUVPP_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_yuvpp>;
+	};
+
+	sysmmu_d0_dns: sysmmu@17540000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17540000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D0_DNS_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D0_DNS_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17550000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x0, 0xf)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0xf)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0xf)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0xf)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x2, 0xf)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xa, 0xf)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x3, 0xf)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x3, 0xf)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x4, 0xf)>,
+			<10 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x4, 0xf)>,
+			<11 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5, 0xf)>,
+			<12 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x5, 0xf)>,
+			<13 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xd, 0xf)>,
+			<14 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x6, 0xf)>,
+			<15 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x6, 0xf)>,
+			<16 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x7, 0xf)>,
+			<17 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x7, 0xf)>;
+		port-name = "DNS M0-M7";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D0_DNS_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_dns>;
+	};
+
+	sysmmu_d1_dns: sysmmu@17580000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17580000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D1_DNS_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D1_DNS_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17590000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x0, 0xf)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x4, 0xf)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0xf)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0xf)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0xf)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x2, 0xf)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x3, 0xf)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x4, 0xe)>;
+		port-name = "DNS M8-M10";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D1_DNS_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_dns>;
+	};
+
+	sysmmu_d0_mcsc: sysmmu@15CA0000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x15ca0000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D0_MCSC_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D0_MCSC_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x15cb0000>;
+		sysmmu,default_tlb = <TLB_CFG(BL32, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL32, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0x7)>,
+			<2 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x0, 0xf)>,
+			<3 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x8, 0xf)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x4, 0xf)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0xc, 0xf)>,
+			<6 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x2, 0x7)>,
+			<7 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x3, 0x7)>;
+		port-name = "GDC0 M0, M3";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D0_MCSC_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mcsc>;
+	};
+
+	sysmmu_d1_mcsc: sysmmu@15CD0000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x15cd0000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D1_MCSC_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D1_MCSC_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x15ce0000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x0, 0x1f)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x8, 0x1f)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x10, 0x1f)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0x1f)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x9, 0x1f)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x11, 0x1f)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0x7f)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x6, 0x7f)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xa, 0x7f)>,
+			<10 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0xe, 0x7f)>,
+			<11 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x12, 0x7f)>,
+			<12 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x16, 0x7f)>,
+			<13 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1a, 0x7f)>,
+			<14 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5a, 0x7f)>,
+			<15 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1e, 0x7f)>;
+		port-name = "GDC1 M0, MCSC M4";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D1_MCSC_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mcsc>;
+	};
+
+	sysmmu_d2_mcsc: sysmmu@15D00000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x15d00000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D2_MCSC_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D2_MCSC_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x15d10000>;
+		sysmmu,tlb_property =
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x0, 0x3f)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x8, 0x3f)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x10, 0x3f)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x18, 0x3f)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x20, 0x3f)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0x3f)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x9, 0x3f)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x11, 0x3f)>,
+			<10 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x19, 0x3f)>,
+			<11 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x21, 0x3f)>,
+			<12 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x2, 0x3f)>,
+			<13 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x12, 0x3f)>,
+			<14 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x22, 0x3f)>,
+			<15 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x3, 0xf)>,
+			<16 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x4, 0xf)>;
+		port-name = "MCSC M0-M2";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D2_MCSC_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mcsc>;
+	};
+
+	sysmmu_d0_mcfp0: sysmmu@178A0000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x178a0000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D0_MCFP0_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D0_MCFP0_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x178b0000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0x7)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0x7)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x4, 0x7)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x0, 0x7)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x4, 0x7)>,
+			<6 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x3, 0x7)>;
+		port-name = "MCFP0 M0-M3";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D0_MCFP0_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mcfp1>;
+	};
+
+	sysmmu_d1_mcfp0: sysmmu@178D0000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x178d0000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D1_MCFP0_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D1_MCFP0_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x178e0000>;
+		sysmmu,default_tlb = <TLB_CFG(BL32, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0x1)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x0, 0x1)>;
+		port-name = "MCFP0 M4";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D1_MCFP0_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mcfp1>;
+	};
+
+	sysmmu_d2_mcfp0: sysmmu@17900000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17900000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D2_MCFP0_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D2_MCFP0_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17910000>;
+		sysmmu,default_tlb = <TLB_CFG(BL32, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property = <1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0x1)>;
+		port-name = "MCFP0 M5";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D2_MCFP0_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mcfp0>;
+	};
+
+	sysmmu_d3_mcfp0: sysmmu@17930000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17930000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D3_MCFP0_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D3_MCFP0_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17940000>;
+		sysmmu,default_tlb = <TLB_CFG(BL32, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property = <1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0x1)>;
+		port-name = "MCFP0 M6";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D3_MCFP0_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mcfp0>;
+	};
+
+	sysmmu_d0_mcfp1: sysmmu@17A70000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17a70000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D_MCFP1_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D_MCFP1_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17a80000>;
+		sysmmu,default_tlb = <TLB_CFG(BL16, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5, 0xf)>,
+			<2 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x6, 0xf)>,
+			<3 TLB_CFG(BL4, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x0, 0xf)>,
+			<4 TLB_CFG(BL4, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x4, 0xf)>,
+			<5 TLB_CFG(BL4, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x0, 0xf)>,
+			<6 TLB_CFG(BL4, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x4, 0xf)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0xf)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x5, 0xf)>,
+			<9 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x3, 0xf)>,
+			<10 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x7, 0xf)>;
+		port-name = "ORBMCH M0-M2";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D_MCFP1_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mcfp1>;
+	};
+
+	sysmmu_d0_mfc0: sysmmu@18670000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x18670000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_MFC0D0_interrupt_s1_ns IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_MFC0D0_interrupt_s1_s IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x18680000>;
+		sysmmu,default_tlb = <TLB_CFG(BL8, PREFETCH_NONE)>;
+		port-name = "MFC0 D0";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_MFC0D0_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mfc0>;
+	};
+
+	sysmmu_d1_mfc0: sysmmu@186A0000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x186a0000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_MFC0D1_interrupt_s1_ns IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_MFC0D1_interrupt_s1_s IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x186b0000>;
+		sysmmu,default_tlb = <TLB_CFG(BL8, PREFETCH_NONE)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL2, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x1, 0x7)>,
+			<2 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x2, 0x7)>;
+		port-name = "MFC0 D1";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_MFC0D1_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mfc0>;
+	};
+
+	sysmmu_d0_mfc1: sysmmu@18870000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x18870000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_MFC1D0_interrupt_s1_ns IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_MFC1D0_interrupt_s1_s IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x18880000>;
+		sysmmu,default_tlb = <TLB_CFG(BL8, PREFETCH_NONE)>;
+		port-name = "MFC1 D0";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_MFC1D0_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mfc1>;
+	};
+
+	sysmmu_d1_mfc1: sysmmu@188A0000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x188a0000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_MFC1D1_interrupt_s1_ns IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_MFC1D1_interrupt_s1_s IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x188b0000>;
+		sysmmu,default_tlb = <TLB_CFG(BL8, PREFETCH_NONE)>;
+		port-name = "MFC1 D1";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_MFC1D1_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_mfc1>;
+	};
+
+	sysmmu_d_m2m: sysmmu@18A00000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x18a00000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__M2M__SYSMMU_D_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__M2M__SYSMMU_D_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x18a10000>;
+		sysmmu,default_tlb = <TLB_CFG(BL32, PREFETCH_NONE)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL8, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x0, 0x7)>,
+			<2 TLB_CFG(BL8, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x1, 0x7)>,
+			<3 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x4, 0x7)>,
+			<4 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x3, 0x7)>,
+			<5 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0xa, 0xf)>;
+		port-name = "MSCL, SMFC, JSQZ";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D_M2M_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_m2m>;
+	};
+
+	sysmmu_d_aud: sysmmu@18D50000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x18d50000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_AUD_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_AUD_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x18d60000>;
+		sysmmu,no-suspend;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_NONE)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x1, 0xf)>,
+			<2 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x9, 0xf)>,
+			<3 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x5, 0x7)>,
+			<4 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x3, 0x7)>,
+			<5 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x4, 0x7)>,
+			<6 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x7, 0xf)>,
+			<7 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0xf, 0xf)>;
+		port-name = "AUD";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SMMU_AUD_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_aud>;
+	};
+
+	sysmmu_d0_npus: sysmmu@17C50000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17c50000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D0_NPUS_INTERRUPT_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D0_NPUS_INTERRUPT_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17c60000>;
+		sysmmu,default_tlb = <TLB_CFG(BL16, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x0, 0x7)>,
+			<2 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x4, 0x7)>,
+			<3 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x1, 0x3)>,
+			<4 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0x7)>,
+			<5 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5, 0x7)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x2, 0x3)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0x7)>,
+			<8 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x6, 0x7)>,
+			<9 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x3, 0x3)>,
+			<10 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x3, 0x7)>,
+			<11 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x7, 0x7)>;
+		port-name = "IP NPUS M13";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D0_NPUS_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_npus>;
+	};
+
+	sysmmu_d1_npus: sysmmu@17C80000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17c80000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D1_NPUS_INTERRUPT_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D1_NPUS_INTERRUPT_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17c90000>;
+		sysmmu,default_tlb = <TLB_CFG(BL16, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x0, 0x7)>,
+			<2 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x4, 0x7)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x2, 0x3)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0x7)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x6, 0x7)>;
+		port-name = "IP NPUS M14";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D1_NPUS_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_npus>;
+	};
+
+	sysmmu_d2_npus: sysmmu@17CB0000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x17cb0000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_D2_NPUS_INTERRUPT_S1_NS IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_D2_NPUS_INTERRUPT_S1_S IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x17cc0000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_PREDICTION)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x3, 0xf)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x5, 0xf)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x7, 0xf)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_RW SYSMMU_ID_MASK(0x6, 0x37)>,
+			<5 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_RW SYSMMU_ID_MASK(0x2, 0x37)>,
+			<6 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_RW SYSMMU_ID_MASK(0x12, 0x37)>,
+			<7 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_RW SYSMMU_ID_MASK(0x22, 0x37)>,
+			<8 TLB_CFG(BL16, PREFETCH_PREDICTION) DIR_RW SYSMMU_ID_MASK(0x32, 0x37)>,
+			<9 TLB_CFG(BL1, PREFETCH_NONE) DIR_RW SYSMMU_ID_MASK(0x4, 0x7)>,
+			<10 TLB_CFG(BL1, PREFETCH_NONE) DIR_WRITE SYSMMU_ID_MASK(0x9, 0xd)>;
+		port-name = "IP NPUS M15";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_D2_NPUS_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_npus>;
+	};
+
+	sysmmu_d0_vpc: sysmmu@16650000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x16650000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_VPC0_interrupt_s1_ns IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_VPC0_interrupt_s1_s IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x16660000>;
+		sysmmu,default_tlb = <TLB_CFG(BL8, PREFETCH_NONE)>;
+		port-name = "VPC M0";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_VPC0_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_vpc>;
+	};
+
+	sysmmu_d1_vpc: sysmmu@16680000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x16680000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_VPC1_interrupt_s1_ns IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_VPC1_interrupt_s1_s IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x16690000>;
+		sysmmu,default_tlb = <TLB_CFG(BL8, PREFETCH_NONE)>;
+		port-name = "VPC M1";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_VPC1_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_vpc>;
+	};
+
+	sysmmu_d2_vpc: sysmmu@166B0000 {
+		compatible = "samsung,sysmmu-v8";
+		reg = <0x00 0x166b0000 0x9000>;
+		interrupts =
+			<GIC_SPI INTREQ__SYSMMU_VPC2_interrupt_s1_ns IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI INTREQ__SYSMMU_VPC2_interrupt_s1_s IRQ_TYPE_LEVEL_HIGH>;
+		qos = <15>;
+		sysmmu,secure-irq;
+		sysmmu,secure_base = <0x166c0000>;
+		sysmmu,default_tlb = <TLB_CFG(BL1, PREFETCH_NONE)>;
+		sysmmu,tlb_property =
+			<1 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x0, 0x37)>,
+			<2 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x1, 0x37)>,
+			<3 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_READ SYSMMU_ID_MASK(0x2, 0x37)>,
+			<4 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_RW SYSMMU_ID_MASK(0x10, 0x37)>,
+			<5 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_RW SYSMMU_ID_MASK(0x11, 0x37)>,
+			<6 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_RW SYSMMU_ID_MASK(0x12, 0x37)>,
+			<7 TLB_CFG(BL1, PREFETCH_PREDICTION) DIR_WRITE SYSMMU_ID_MASK(0x20, 0x20)>;
+		port-name = "VPC M2";
+		#iommu-cells = <0>;
+		clocks = <&clock GATE_SYSMMU_VPC2_QCH_S1>;
+		clock-names = "aclk";
+		power-domains = <&pd_vpc>;
+	};
+
+	iommu_group_dpu: iommu_group_dpu {
+		compatible = "samsung,sysmmu-group";
+	};
+
+	iommu_group_mfc: iommu_group_mfc {
+		compatible = "samsung,sysmmu-group";
+	};
+
+	iommu_group_is: iommu_group_is {
+		compatible = "samsung,sysmmu-group";
+	};
+
+	iommu_group_g2d: iommu_group_g2d {
+		compatible = "samsung,sysmmu-group";
+	};
+
+	iommu_group_mscl_smfc: iommu_group_mscl_smfc {
+		compatible = "samsung,sysmmu-group";
+	};
+
+	iommu_group_camerapp_gdc: iommu_group_camerapp_gdc {
+		compatible = "samsung,sysmmu-group";
+	};
+
+	iommu_group_aud: iommu_group_aud {
+		compatible = "samsung,sysmmu-group";
+		samsung,unmanaged-domain;
+	};
+
+	iommu_group_npu: iommu_group_npu {
+		compatible = "samsung,sysmmu-group";
+	};
+
+	iommu_group_vpc: iommu_group_vpc {
+		compatible = "samsung,sysmmu-group";
+	};
+};
